@@ -27,13 +27,12 @@ USER REQUIREMENTS
 7. Generate user's billing cycles.
 8. Display User's expenditure history.
 9. Display user's expenditure statuses.
-10.Display user expenditure analysis report based on expenditure history.
-11.Notify user about due payments via email notifications.
-12.Give user a payment gateway to pay his dues.
-13.Display user's payment transactions.
-14.Display User's payment Statuses
-15.Display user's credit score.
-
+10. Display user expenditure analysis report based on expenditure history.
+11. Notify user about due payments via email notifications.
+12. Give user a payment gateway to pay his dues.
+13. Display user's payment transactions.
+14. Display User's payment Statuses.
+15. Display user's credit score.
 
 TECH STACK
 -------------
