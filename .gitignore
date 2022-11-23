@@ -1,0 +1,36 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/credcheck-frontend/node_modules
+/credcheck-frontend/.pnp
+/credcheck-frontend.pnp.js
+
+# testing
+/credcheck-frontend/coverage
+
+# next.js
+/credcheck-frontend/.next/
+/credcheck-frontend/out/
+
+# production
+/credcheck-frontend/build
+
+# misc
+/credcheck-frontend.DS_Store
+/credcheck-frontend*.pem
+
+# debug
+/credcheck-frontendnpm-debug.log*
+/credcheck-frontendyarn-debug.log*
+/credcheck-frontendyarn-error.log*
+/credcheck-frontend.pnpm-debug.log*
+
+# local env files
+/credcheck-frontend.env*.local
+
+# vercel
+/credcheck-frontend.vercel
+
+# typescript
+/credcheck-frontend*.tsbuildinfo
+/credcheck-frontendnext-env.d.ts
