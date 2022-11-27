@@ -5,6 +5,7 @@ export interface IUsers{
     firstname:string,
     lastname:string,
     username:string,
+    email: string,
     password:string,
     gender:string,
     phone_number:number,
@@ -21,9 +22,10 @@ export interface IUsersModel extends Model<IUsersDocument> {
     findOneOrCreate:(
         this:IUsersModel,
         {
-          firstname,
+            firstname,
             lastname,
             username,
+            email,
             password,
             gender,
             phone_number,
