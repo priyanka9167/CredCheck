@@ -34,34 +34,61 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose")), Mongoose = mongoose_1;
 const userSchema = new Mongoose.Schema({
-    firstname: String,
-    lastname: String,
-    username: String,
-    password: String,
-    gender: String,
-    phone_number: Number,
-    address: String,
-    status: String,
-    dob: String
+    firstname: {
+        type: String,
+        required: true
+    },
+    lastname: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    username: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    gender: {
+        type: String
+    },
+    phone_number: {
+        type: Number
+    },
+    address: {
+        type: String
+    },
+    status: {
+        type: String
+    },
+    dob: {
+        type: Date
+    }
 });
-userSchema.statics.findOneOrCreate = function ({ firstname, lastname, username, password, gender, phone_number, address, status, dob }) {
+userSchema.statics.findOneOrCreate = function ({ firstname, lastname, username, email, password, gender, phone_number, address, status, dob }) {
     return __awaiter(this, void 0, void 0, function* () {
         const userRecord = yield this.findOne({
-            username, phone_number
+            username, email
         });
         if (userRecord) {
-            return userRecord;
+            return 'User Already exist';
         }
         else {
             return this.create({
                 firstname,
                 lastname,
                 username,
+                email,
                 password,
                 gender,
                 phone_number,
                 address,
-                status,
+                status: 'ACTIVE',
                 dob
             });
         }

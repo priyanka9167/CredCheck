@@ -3,4 +3,4 @@ import * as UserController from '../controllers/user.controller';
 
 export const router = express.Router();
 
-router.post('/create', UserController.createUserController);
+router.post('/', UserController.createUserController);

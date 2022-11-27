@@ -3,15 +3,41 @@ import { IUsersDocument,IUsersModel,IUsers } from "../../types/user.types";
 
 
 const userSchema = new Mongoose.Schema<IUsersDocument,IUsersModel>({
-    firstname:String,
-    lastname:String,
-    username:String,
-    password:String,
-    gender:String,
-    phone_number:Number,
-    address:String,
-    status:String,
-    dob:String
+    firstname: {
+        type: String,
+        required: true
+    },
+    lastname: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    username: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    gender: {
+        type:String
+    },
+    phone_number: {
+        type:Number
+    },
+    address: {
+        type: String
+    },
+    status: { 
+        type: String
+    },
+    dob: { 
+        type: Date
+    }
 });
 
 
@@ -21,6 +47,7 @@ userSchema.statics.findOneOrCreate = async function (
         firstname,
         lastname,
         username,
+        email,
         password,
         gender,
         phone_number,
@@ -28,13 +55,13 @@ userSchema.statics.findOneOrCreate = async function (
         status,
         dob
     }:IUsers
-): Promise<IUsersDocument> {
+): Promise<IUsersDocument | String> {
     const userRecord = await this.findOne({
-        username,phone_number
+        username,email
     });
     if(userRecord)
     {
-        return userRecord
+        return 'User Already exist'
     }
     else{
         return this.create({
@@ -42,11 +69,12 @@ userSchema.statics.findOneOrCreate = async function (
             firstname,
             lastname,
             username,
+            email,
             password,
             gender,
             phone_number,
             address,
-            status,
+            status : 'ACTIVE',
             dob 
         })
     }
