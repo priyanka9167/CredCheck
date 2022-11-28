@@ -30,7 +30,7 @@ export default function RegisterForm() {
           email:values.email,
           password:values.password
         }
-        const res = await userRegistration('/users',payload);
+        const res = await userRegistration(payload);
         console.log(res);
 
        }}
@@ -113,7 +113,7 @@ export default function RegisterForm() {
             <div className="col-md-6">
               <div className="form-floating">
                 <Field
-                  type="text"
+                  type="password"
                   name="password"
                   id="password"
                   className="form-control"
@@ -127,7 +127,7 @@ export default function RegisterForm() {
             <div className="col-md-6">
               <div className="form-floating">
                 <Field
-                  type="text"
+                  type="password"
                   name="confirm_password"
                   id="confirm_password"
                   className="form-control"

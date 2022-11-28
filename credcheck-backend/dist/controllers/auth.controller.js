@@ -43,7 +43,7 @@ const loginAuthController = (req, res) => __awaiter(void 0, void 0, void 0, func
         const userData = yield authService.loginAuth(req);
         if (userData) {
             const token = jsonwebtoken_1.default.sign({ _id: userData._id }, process.env.TOKEN_SECRET);
-            res.header('auth-token', token);
+            res.set('auth-token', token);
             res.send({ "data": userData });
         }
     }

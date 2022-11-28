@@ -7,7 +7,7 @@ export const loginAuthController = async(req: Request, res: Response): Promise<v
         const userData = await authService.loginAuth(req);
         if (userData) {
             const token = jwt.sign({_id: userData._id}, process.env.TOKEN_SECRET!);
-            res.header('auth-token',token);
+            res.set('auth-token',token);
             res.send ({"data": userData});
 
         }     

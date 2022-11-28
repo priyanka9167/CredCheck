@@ -14,7 +14,9 @@ dotenv.config();
 
 
 const app:Express = express();
-app.use(cors());
+app.use(cors({
+  exposedHeaders: ['Content-Length', 'auth-token'],
+}));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(bodyParser.json());
