@@ -13,7 +13,7 @@ exports.connectDb = void 0;
 const mongoose_1 = require("mongoose");
 const connectDb = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield (0, mongoose_1.connect)('mongodb://localhost:27017/credcheck');
+        yield (0, mongoose_1.connect)('mongodb://127.0.0.1:27017/credcheck');
         console.log("DB connected");
     }
     catch (e) {

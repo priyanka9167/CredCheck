@@ -32,6 +32,7 @@ const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const db_1 = require("./db/db");
 const UserRoutes = __importStar(require("./routes/user.routes"));
+const AuthRoutes = __importStar(require("./routes/auth.routes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
@@ -40,6 +41,7 @@ app.use(body_parser_1.default.json());
 const port = process.env.PORT;
 (0, db_1.connectDb)();
 app.use('/users', UserRoutes.router);
+app.use('/login', AuthRoutes.router);
 app.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);
 });

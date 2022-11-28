@@ -1,6 +1,5 @@
 import mongoose, * as Mongoose from "mongoose";
-import { IUsersDocument,IUsersModel,IUsers } from "../../types/user.types";
-
+import { IUsersDocument,IUsersModel,IUsers, IUserLoginCred } from "../../types/user.types";
 
 const userSchema = new Mongoose.Schema<IUsersDocument,IUsersModel>({
     firstname: {
@@ -79,6 +78,8 @@ userSchema.statics.findOneOrCreate = async function (
         })
     }
 }
+
+
 
 const userModel = mongoose.model<IUsersDocument,IUsersModel>('user',userSchema)
 

@@ -14,6 +14,11 @@ export interface IUsers{
     dob:Date,
  }
 
+ export interface IUserLoginCred {
+    username: String,
+    password: String
+ }
+
 export interface IUsersDocument extends IUsers, Document {
     sameLastName: (this: IUsersDocument) => Promise<Document[]>;
 }
@@ -34,4 +39,5 @@ export interface IUsersModel extends Model<IUsersDocument> {
             dob  
         }:IUsers
     ) => Promise<IUsersDocument>;
+
 }
