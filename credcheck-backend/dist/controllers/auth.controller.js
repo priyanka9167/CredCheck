@@ -31,68 +31,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importStar(require("mongoose")), Mongoose = mongoose_1;
-const userSchema = new Mongoose.Schema({
-    firstname: {
-        type: String,
-        required: true
-    },
-    lastname: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true
-    },
-    username: {
-        type: String,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true
-    },
-    gender: {
-        type: String
-    },
-    phone_number: {
-        type: Number
-    },
-    address: {
-        type: String
-    },
-    status: {
-        type: String
-    },
-    dob: {
-        type: Date
+exports.loginAuthController = void 0;
+const authService = __importStar(require("../services/auth.service"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const loginAuthController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const userData = yield authService.loginAuth(req);
+        if (userData) {
+            const token = jsonwebtoken_1.default.sign({ _id: userData._id }, process.env.TOKEN_SECRET);
+            res.header('auth-token', token);
+            res.send({ "data": userData });
+        }
+    }
+    catch (err) {
+        console.log(err);
     }
 });
-userSchema.statics.findOneOrCreate = function ({ firstname, lastname, username, email, password, gender, phone_number, address, status, dob }) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const userRecord = yield this.findOne({
-            username, email
-        });
-        if (userRecord) {
-            return 'User Already exist';
-        }
-        else {
-            return this.create({
-                firstname,
-                lastname,
-                username,
-                email,
-                password,
-                gender,
-                phone_number,
-                address,
-                status: 'ACTIVE',
-                dob
-            });
-        }
-    });
-};
-const userModel = mongoose_1.default.model('user', userSchema);
-exports.default = userModel;
+exports.loginAuthController = loginAuthController;

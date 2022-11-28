@@ -8,23 +8,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.connectDb = void 0;
-const mongoose_1 = require("mongoose");
-const connectDb = () => __awaiter(void 0, void 0, void 0, function* () {
+exports.loginAuth = void 0;
+const user_schema_1 = __importDefault(require("../models/users/user.schema"));
+const loginAuth = (req) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield (0, mongoose_1.connect)('mongodb://127.0.0.1:27017/credcheck');
-        console.log("DB connected");
+        const validatedUser = yield user_schema_1.default.findOne({ username: req.body.username, password: req.body.password });
+        return validatedUser;
     }
     catch (e) {
-        console.log("Error connecting Mongo --->>> ", e);
+        console.log(e);
     }
 });
-exports.connectDb = connectDb;
-// Safer way to get disconnected
-// export const disconnect = () => {
-//     if (!database) {
-//         return;
-//     }
-//     Mongoose.disconnect();
-// };
+exports.loginAuth = loginAuth;

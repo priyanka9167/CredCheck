@@ -5,12 +5,18 @@ export interface IUsers{
     firstname:string,
     lastname:string,
     username:string,
+    email: string,
     password:string,
     gender:string,
     phone_number:number,
     address:string,
     status:string,
     dob:Date,
+ }
+
+ export interface IUserLoginCred {
+    username: String,
+    password: String
  }
 
 export interface IUsersDocument extends IUsers, Document {
@@ -21,9 +27,10 @@ export interface IUsersModel extends Model<IUsersDocument> {
     findOneOrCreate:(
         this:IUsersModel,
         {
-          firstname,
+            firstname,
             lastname,
             username,
+            email,
             password,
             gender,
             phone_number,
@@ -32,4 +39,5 @@ export interface IUsersModel extends Model<IUsersDocument> {
             dob  
         }:IUsers
     ) => Promise<IUsersDocument>;
+
 }

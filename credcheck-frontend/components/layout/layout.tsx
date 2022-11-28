@@ -5,6 +5,7 @@ export default function Layout({children}:{children: any}): JSX.Element {
     return (
         <>
             <Header/>
+            
             {children}
             <Footer/>
         </>
