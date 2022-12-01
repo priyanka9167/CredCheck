@@ -1,4 +1,4 @@
-import {Field, Form, Formik, ErrorMessage } from "formik";
+import {Field, Form, Formik, ErrorMessage, FormikHelpers } from "formik";
 import { login } from '../../services/users/users';
 import * as Yup from "yup";
 
@@ -14,13 +14,26 @@ export default function LoginForm() {
     return (
         <Formik
         initialValues={initialValues}
-        onSubmit={async(values, actions) => {
-            const payload = {
-              username: values.username,
-              password:values.password
+        onSubmit={async(values,{resetForm}:FormikHelpers<LoginFormValues>):Promise<void> => {
+            try{
+                const payload = {
+                    username: values.username,
+                    password:values.password
+                  }
+                  const res = await login(payload);
+                  if(res.status === 200)
+                  {
+                      console.log(res.data?.userData);
+                      localStorage.setItem('cred-users', JSON.stringify(res.data?.userData));
+                      localStorage.setItem('cred-token',JSON.stringify(res.headers["auth-token"]));
+                      resetForm();
+                  }
             }
-            const res = await login(payload);
-            console.log("res", res);
+           catch(e)
+           {
+                console.log(e);
+           }
+            
            }}
         
            validationSchema={Yup.object().shape({

@@ -27,6 +27,7 @@ export default function RegisterForm() {
         const payload = {
           firstname:values.firstname,
           lastname:values.lastname,
+          username:values.username,
           email:values.email,
           password:values.password
         }
