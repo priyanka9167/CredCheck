@@ -7,6 +7,6 @@ export const loginAuth = async(req: any) :Promise<any> => {
      return validatedUser;
     }
     catch (e) {
-       console.log(e);
+        throw new Error("hello")
     }
 }

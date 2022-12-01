@@ -4,6 +4,7 @@ import Layout from '../components/layout/layout';
 import {store} from '../redux/store';
 import { Provider } from 'react-redux';
 import { useEffect } from 'react';
+import { useAuthListener } from '../components/session';
 
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -12,7 +13,8 @@ export default function App({ Component, pageProps }: AppProps) {
     }, []);
   return (
     <Provider store={store}>
-    <Layout>
+     <Layout>
+      
       <Component {...pageProps} />
     </Layout>
     </Provider>

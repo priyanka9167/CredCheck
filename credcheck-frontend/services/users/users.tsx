@@ -1,10 +1,10 @@
 import axios from 'axios';
 import api from '../../interceptors/api';
-const local_url = 'http://localhost:8000';
+import { API_CONSTANTS } from '../../constants/api_endpoints.constants';
 
-const userRegistration = async(url: String, payload: any): Promise<any> => {
+const userRegistration = async(payload: any): Promise<any> => {
     try {
-        let response = await axios.post(`${local_url}${url}`, payload);
+        let response = await axios.post(`${API_CONSTANTS.BASE_URL}${API_CONSTANTS.REGISTER}`, payload);
         return response
     }
     catch (err) {
@@ -12,4 +12,13 @@ const userRegistration = async(url: String, payload: any): Promise<any> => {
     }
 }
 
-export {userRegistration}
+const login = async(payload: any): Promise<any> => {
+    try {
+        let response = await axios.post(`${API_CONSTANTS.BASE_URL}${API_CONSTANTS.LOGIN}`, payload);
+        return response
+    } catch (err) {
+        return err
+    }
+}
+
+export {userRegistration, login}

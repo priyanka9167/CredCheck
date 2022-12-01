@@ -38,17 +38,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.loginAuthController = void 0;
 const authService = __importStar(require("../services/auth.service"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const loginAuthController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const loginAuthController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const userData = yield authService.loginAuth(req);
         if (userData) {
             const token = jsonwebtoken_1.default.sign({ _id: userData._id }, process.env.TOKEN_SECRET);
-            res.header('auth-token', token);
-            res.send({ "data": userData });
+            res.set('auth-token', token);
+            const resPayload = {
+                'firstname': userData['firstname'] || '',
+                'lastname': userData['lastname'] || '',
+                'email': userData['email'] || '',
+                'status': userData['status'],
+                'username': userData['username']
+            };
+            res.send({ resPayload });
         }
     }
     catch (err) {
+        next(err);
         console.log(err);
+        throw new Error("hello");
     }
 });
 exports.loginAuthController = loginAuthController;
