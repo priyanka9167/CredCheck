@@ -3,23 +3,36 @@ import {
     PayloadAction,
   } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
-import userTypes from '../../models/user.types';
+import { userState,cred_token} from '../../models/user.types';
 
-const initialState:userTypes = {
-    firstname:"",
-    lastname:"",
-    username:"",
-    email:"",
-    password:"",
-    gender:"",
+ export interface initialUserState{
+    user:userState,
+    token:cred_token
 }
+
+const initialState:initialUserState = {
+    user:{
+        _id:"",
+        firstname:"",
+        lastname:"",
+        username:"",
+        email:"",
+        status:"",
+       
+    },
+    token:{
+        cred_token:"" 
+    }
+    
+ }
 
 export const userSlice = createSlice({
     name:'user',
     initialState,
     reducers:{
-        addUser:(state,action:PayloadAction<userTypes>) => {
-            console.log(action)
+        addUser:(state,action:PayloadAction<initialUserState>) => {
+            state.user = action.payload.user;
+            state.token = action.payload.token;
         }
     }
 });
@@ -28,5 +41,7 @@ export const {
     addUser
 } = userSlice.actions
 
+export const selectUser = (state:RootState) => state.user.user;
+export const selectToken = (state:RootState) => state.user.token;
 
 export default userSlice.reducer
