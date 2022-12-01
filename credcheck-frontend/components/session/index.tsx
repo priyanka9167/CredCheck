@@ -6,6 +6,7 @@ import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 import { userState, cred_token } from "../../models/user.types";
 import { initialUserState, selectUser } from "../../redux/reducers/userReducers";
 import { RootState } from "../../redux/store";
+import Router from "next/router";
 
 
 
@@ -19,8 +20,12 @@ export const useAuthListener = () => {
         try {
             let user = localStorage.getItem('cred-users');
             let token = localStorage.getItem('cred-token');
-
+            console.log('entered');
             if (user && token) {
+                if(Router.pathname === '/login')
+                {
+                    Router.push('/')
+                }
                 const payload: initialUserState = {
                     user: JSON.parse(user as string),
                     token: {
@@ -28,6 +33,10 @@ export const useAuthListener = () => {
                     }
                 }
                 dispatch(addUser(payload));
+              
+            }
+            else{
+                Router.push('/login');
             }
         }
         catch (e) {
