@@ -4,11 +4,11 @@ import * as Yup from "yup";
 
 interface LoginFormValues {
     username:string;
-    password: string;
+   //  password: string;
   }
 export default function LoginForm() {
     const initialValues: LoginFormValues = {
-        password: '',
+      //   password: '',
         username: ''
     }
     return (
@@ -17,10 +17,9 @@ export default function LoginForm() {
         onSubmit={async(values, actions) => {
             const payload = {
               username: values.username,
-              password:values.password
+            //  password:values.password
             }
             const res = await login(payload);
-            console.log("res", res);
            }}
         
            validationSchema={Yup.object().shape({
