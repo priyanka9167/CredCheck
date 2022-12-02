@@ -1,4 +1,3 @@
-import { string } from "yup";
 
 export default interface storage  {
     username:string,

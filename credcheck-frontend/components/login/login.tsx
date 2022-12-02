@@ -1,6 +1,8 @@
 import {Field, Form, Formik, ErrorMessage, FormikHelpers } from "formik";
 import { login } from '../../services/users/users';
 import * as Yup from "yup";
+import { useAuthListener } from '../session';
+import Router from "next/router";
 
 interface LoginFormValues {
     username:string;
@@ -11,6 +13,9 @@ export default function LoginForm() {
         password: '',
         username: ''
     }
+
+    console.log("login running")
+
     return (
         <Formik
         initialValues={initialValues}
@@ -26,7 +31,11 @@ export default function LoginForm() {
                       console.log(res.data?.userData);
                       localStorage.setItem('cred-users', JSON.stringify(res.data?.userData));
                       localStorage.setItem('cred-token',JSON.stringify(res.headers["auth-token"]));
+
                       resetForm();
+                      Router.push('/');
+                    
+                      
                   }
             }
            catch(e)
