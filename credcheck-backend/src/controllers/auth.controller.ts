@@ -18,6 +18,7 @@ export const loginAuthController = async(req: Request, res: Response, next: Next
             const token = jwt.sign({_id: userData._id}, process.env.TOKEN_SECRET!);
             res.set('auth-token',token);
             const resPayload = {
+                'id':userData['_id'] || '',
                 'firstname': userData['firstname'] || '',
                 'lastname': userData['lastname'] || '',
                 'email': userData['email'] || '',

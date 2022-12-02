@@ -14,7 +14,7 @@ export default function LoginForm() {
         username: ''
     }
 
-    console.log("login running")
+    
 
     return (
         <Formik
@@ -28,8 +28,8 @@ export default function LoginForm() {
                   const res = await login(payload);
                   if(res.status === 200)
                   {
-                      console.log(res.data?.userData);
-                      localStorage.setItem('cred-users', JSON.stringify(res.data?.userData));
+                      console.log(res.data?.resPayload);
+                      localStorage.setItem('cred-users', JSON.stringify(res.data?.resPayload));
                       localStorage.setItem('cred-token',JSON.stringify(res.headers["auth-token"]));
 
                       resetForm();

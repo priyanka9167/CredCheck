@@ -15,7 +15,7 @@ export  interface userTypes  {
 }
 
 export interface userState {
-    
+    id:string,
     firstname:string,
     lastname:string,
     username:string,
