@@ -1,9 +1,9 @@
 import * as userService from '../services/user.service';
-import { IUsers, IUsersDocument,IUsersModel } from '../types/user.types';
-import { Request,Response } from 'express';
+import { IUsers } from '../types/user.types';
+import { NextFunction, Request,Response } from 'express';
 
 
-export const createUserController = async(req:Request,res:Response): Promise<void> => {
+export const createUserController = async(req:Request,res:Response, next: NextFunction): Promise<void> => {
     try{
       console.log("inside contoler request",req.body)
 
@@ -12,6 +12,6 @@ export const createUserController = async(req:Request,res:Response): Promise<voi
     }
     catch(e)
     {
-      console.log(e);
+      next(e);
     }
 }

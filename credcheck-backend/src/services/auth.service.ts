@@ -1,12 +1,13 @@
-import { IUsersDocument } from "../types/user.types";
 import userModel from "../models/users/user.schema";
 
 export const loginAuth = async(req: any) :Promise<any> => {
+    const username = req.body.username;
+    const password = req.body.password;
     try{
-     const validatedUser = await userModel.findOne( {username: req.body.username, password: req.body.password}); 
+     const validatedUser = await userModel.findOne( {username: username, password: password}); 
      return validatedUser;
     }
     catch (e) {
-        throw new Error("hello")
+        console.log(e);
     }
 }

@@ -15,12 +15,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.loginAuth = void 0;
 const user_schema_1 = __importDefault(require("../models/users/user.schema"));
 const loginAuth = (req) => __awaiter(void 0, void 0, void 0, function* () {
+    const username = req.body.username;
+    const password = req.body.password;
     try {
-        const validatedUser = yield user_schema_1.default.findOne({ username: req.body.username, password: req.body.password });
+        const validatedUser = yield user_schema_1.default.findOne({ username: username, password: password });
         return validatedUser;
     }
     catch (e) {
-        throw new Error("hello");
+        console.log(e);
     }
 });
 exports.loginAuth = loginAuth;

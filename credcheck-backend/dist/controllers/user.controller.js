@@ -34,14 +34,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createUserController = void 0;
 const userService = __importStar(require("../services/user.service"));
-const createUserController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const createUserController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         console.log("inside contoler request", req.body);
         const userData = yield userService.createUser(req.body);
         res.send({ "data": userData });
     }
     catch (e) {
-        console.log(e);
+        next(e);
     }
 });
 exports.createUserController = createUserController;

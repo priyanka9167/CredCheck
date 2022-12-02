@@ -1,4 +1,5 @@
-import express, {Express,Request,Response} from 'express';
+import express, { Express } from 'express';
+import errorHandler  from './middlewares/error-handler.middleware';
 import bodyParser from 'body-parser';
 import cors from  'cors';
 import dotenv from 'dotenv';
@@ -9,24 +10,21 @@ import * as AuthRoutes from './routes/auth.routes';
 
 dotenv.config();
 
-
-
-
-
 const app:Express = express();
 app.use(cors({
   exposedHeaders: ['Content-Length', 'auth-token'],
 }));
 app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use(bodyParser.json());
-
 const port = process.env.PORT;
 connectDb();
 
 
 app.use('/users',UserRoutes.router);
 app.use('/login', AuthRoutes.router);
+
+// add custom error handler middleware as the last middleware
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);

@@ -22,13 +22,37 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.router = void 0;
-const express_1 = __importDefault(require("express"));
-const UserController = __importStar(require("../controllers/user.controller"));
-const verify_jwt_token_middleware_1 = require("../middlewares/verify-jwt-token.middleware");
-exports.router = express_1.default.Router();
-exports.router.post('/', verify_jwt_token_middleware_1.authenticateToken, UserController.createUserController);
+const mongoose_1 = __importStar(require("mongoose")), Mongoose = mongoose_1;
+const cardsSchema = new Mongoose.Schema({
+    cardNumber: {
+        type: String,
+        required: true
+    },
+    CVV: {
+        type: String,
+        required: true
+    },
+    expiryDate: {
+        type: Date,
+        required: true
+    },
+    bankName: {
+        type: String,
+        required: true
+    },
+    cardType: {
+        type: String,
+        required: true
+    },
+    billingCycle: {
+        type: Date,
+        required: true
+    },
+    status: {
+        type: String,
+        required: true
+    }
+});
+const cardModel = mongoose_1.default.model('card', cardsSchema);
+exports.default = cardModel;

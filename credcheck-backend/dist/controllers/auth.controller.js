@@ -38,8 +38,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.loginAuthController = void 0;
 const authService = __importStar(require("../services/auth.service"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const custom_error_model_1 = require("../models/custom-error.model");
 const loginAuthController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const username = req.body.username;
+    const password = req.body.password;
     try {
+        if (!username || username.trim() === '') {
+            throw new custom_error_model_1.CustomError('Invalid JSON received', 400, 'Username field absent');
+        }
+        else if (!password || password.trim() === '') {
+            throw new custom_error_model_1.CustomError('Invalid JSON received', 400, 'Password field absent');
+        }
         const userData = yield authService.loginAuth(req);
         if (userData) {
             const token = jsonwebtoken_1.default.sign({ _id: userData._id }, process.env.TOKEN_SECRET);
@@ -56,8 +65,6 @@ const loginAuthController = (req, res, next) => __awaiter(void 0, void 0, void 0
     }
     catch (err) {
         next(err);
-        console.log(err);
-        throw new Error("hello");
     }
 });
 exports.loginAuthController = loginAuthController;
