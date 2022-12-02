@@ -22,10 +22,7 @@ export const useAuthListener = () => {
             let token = localStorage.getItem('cred-token');
             console.log('entered');
             if (user && token) {
-                if(Router.pathname === '/login')
-                {
-                    Router.push('/')
-                }
+               
                 const payload: initialUserState = {
                     user: JSON.parse(user as string),
                     token: {
@@ -35,9 +32,7 @@ export const useAuthListener = () => {
                 dispatch(addUser(payload));
               
             }
-            else{
-                Router.push('/login');
-            }
+           
         }
         catch (e) {
             console.log(e);
