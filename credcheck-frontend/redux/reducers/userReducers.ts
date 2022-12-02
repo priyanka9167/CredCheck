@@ -12,7 +12,7 @@ import { userState,cred_token} from '../../models/user.types';
 
 const initialState:initialUserState = {
     user:{
-        
+        id:"",
         firstname:"",
         lastname:"",
         username:"",
