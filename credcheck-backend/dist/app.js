@@ -27,6 +27,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const error_handler_middleware_1 = __importDefault(require("./middlewares/error-handler.middleware"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
@@ -44,6 +45,8 @@ const port = process.env.PORT;
 (0, db_1.connectDb)();
 app.use('/users', UserRoutes.router);
 app.use('/login', AuthRoutes.router);
+// add custom error handler middleware as the last middleware
+app.use(error_handler_middleware_1.default);
 app.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);
 });
