@@ -15,13 +15,13 @@ export  interface userTypes  {
 }
 
 export interface userState {
-    _id:string,
+    
     firstname:string,
     lastname:string,
     username:string,
     email:string,
     status:string,
-    password?:string,
+   
 }
 
 export interface cred_token{

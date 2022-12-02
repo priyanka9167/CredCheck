@@ -12,7 +12,7 @@ import { userState,cred_token} from '../../models/user.types';
 
 const initialState:initialUserState = {
     user:{
-        _id:"",
+        
         firstname:"",
         lastname:"",
         username:"",
@@ -42,6 +42,8 @@ export const {
 } = userSlice.actions
 
 export const selectUser = (state:RootState) => state.user.user;
+
+
 export const selectToken = (state:RootState) => state.user.token;
 
 export default userSlice.reducer
