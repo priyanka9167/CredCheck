@@ -54,6 +54,7 @@ const loginAuthController = (req, res, next) => __awaiter(void 0, void 0, void 0
             const token = jsonwebtoken_1.default.sign({ _id: userData._id }, process.env.TOKEN_SECRET);
             res.set('authorization', token);
             const resPayload = {
+                'id': userData['_id'] || '',
                 'firstname': userData['firstname'] || '',
                 'lastname': userData['lastname'] || '',
                 'email': userData['email'] || '',
