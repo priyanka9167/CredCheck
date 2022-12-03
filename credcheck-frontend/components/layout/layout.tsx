@@ -21,19 +21,19 @@ export default function Layout({ children }: { children: any }) {
     const router = useRouter();
   
     const checkAuth = () => {
-       console.log("inside layout function",user.email === '' || user.username === '' || user.email === null || user.username === null || token.cred_token === null || token.cred_token === null)
-        if (user.email === '' || user.username === '' || user.email === null || user.username === null || token.cred_token === null || token.cred_token === null) {
-            if (router.pathname !== '/login') {
-                router.push('/login')
-            }
+    //    console.log("inside layout function",user.email === '' || user.username === '' || user.email === null || user.username === null || token.cred_token === null || token.cred_token === null)
+    //     if (user.email === '' || user.username === '' || user.email === null || user.username === null || token.cred_token === null || token.cred_token === null) {
+    //         if (router.pathname !== '/login') {
+    //             router.push('/login')
+    //         }
 
-        }
-        else {
-            console.log('runnning',router.pathname )
-            if (router.pathname === '/login') {
-                router.push('/');
-            }
-        }
+    //     }
+    //     else {
+    //         console.log('runnning',router.pathname )
+    //         if (router.pathname === '/login') {
+    //             router.push('/');
+    //         }
+    //     }
     }
 
     useEffect(() => {
