@@ -36,7 +36,8 @@ const userSchema = new Mongoose.Schema<IUsersDocument,IUsersModel>({
     },
     dob: { 
         type: Date
-    }
+    },
+   
 });
 
 
@@ -78,6 +79,8 @@ userSchema.statics.findOneOrCreate = async function (
         })
     }
 }
+
+
 
 
 
