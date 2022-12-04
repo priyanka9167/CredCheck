@@ -24,7 +24,7 @@ connectDb();
 
 app.use('/users',UserRoutes.router);
 app.use('/login', AuthRoutes.router);
-app.use('/payment',PaymentRoutes.router);
+app.use('/payment',authenticateToken,PaymentRoutes.router);
 
 // add custom error handler middleware as the last middleware
 app.use(errorHandler);
