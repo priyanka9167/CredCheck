@@ -6,6 +6,8 @@ import dotenv from 'dotenv';
 import {connectDb} from "./db/db";
 import * as UserRoutes from './routes/user.routes';
 import * as AuthRoutes from './routes/auth.routes';
+import * as PaymentRoutes from './routes/payment.routes';
+import { authenticateToken } from './middlewares/verify-jwt-token.middleware';
 
 
 dotenv.config();
@@ -22,6 +24,7 @@ connectDb();
 
 app.use('/users',UserRoutes.router);
 app.use('/login', AuthRoutes.router);
+app.use('/payment',PaymentRoutes.router);
 
 // add custom error handler middleware as the last middleware
 app.use(errorHandler);

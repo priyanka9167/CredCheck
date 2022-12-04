@@ -42,6 +42,7 @@ const custom_error_model_1 = require("../models/custom-error.model");
 const loginAuthController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const username = req.body.username;
     const password = req.body.password;
+    console.log(username, password);
     try {
         if (!username || username.trim() === '') {
             throw new custom_error_model_1.CustomError('Invalid JSON received', 400, 'Username field absent');

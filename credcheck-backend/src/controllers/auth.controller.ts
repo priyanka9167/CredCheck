@@ -6,6 +6,7 @@ import { CustomError } from '../models/custom-error.model';
 export const loginAuthController = async(req: Request, res: Response, next: NextFunction): Promise<void> => {
     const username = req.body.username;
     const password = req.body.password;
+    console.log(username,password)
     try {
         if (!username || username.trim() === '') {
             throw new CustomError('Invalid JSON received', 400, 'Username field absent');
