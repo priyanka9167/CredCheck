@@ -45,6 +45,7 @@ export default function NewCard() {
                             card_status: values.card_status
                         }
                         
+                        
                        
                     }
                     catch (e) {
@@ -59,7 +60,7 @@ export default function NewCard() {
                         .matches(/^[a-z ,.'-]+$/i, "Invalid name"),
                     card_no: Yup.string()
                         .required("Card Number is required")
-                        .matches(/^[0-9]{12,12}$/i, "Invalid card number"),
+                        .matches(/^[0-9]{16,16}$/i, "Invalid card number"),
                     card_type: Yup.string()
                         .required("Please enter card type")
                         .matches(/^[a-z ,.'-]+$/i, "Invalid card type"),

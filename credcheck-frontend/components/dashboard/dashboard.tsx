@@ -8,6 +8,9 @@ export default function Dashboard() {
 
     return (
         <div className="container">
+             <span>
+                <Link className='btn btn-primary btn-addnew' href="/addcard">Add Card</Link>
+            </span>
               <div className="cred-card">
             <div className="front side">
                 <span className="companyname">
@@ -35,9 +38,7 @@ export default function Dashboard() {
                     </tbody>
                 </table>
             </div>
-            <span>
-                <Link className='btn btn-primary btn-addnew' href="/addcard">Add Card</Link>
-            </span>
+           
             
         </div>
         </div>

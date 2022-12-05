@@ -41,9 +41,10 @@ img{
 }
 
 .cred-card {
-  margin: 50px auto;
+  // margin: 50px auto;
   display: table;
   position: relative;
+  margin-top: 20px;
 }
 
 .front .cardnumber ul {
@@ -116,4 +117,14 @@ img{
 }
 .small{
   font-size:10px;
+}
+.navbar{margin-bottom: 50px;}
+
+.footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+ padding: 20px 0;
+ margin-top: 50px;
 }

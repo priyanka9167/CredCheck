@@ -3,6 +3,12 @@ import { login } from '../../services/users/users';
 import * as Yup from "yup";
 import { useAuthListener } from '../session';
 import Router from "next/router";
+import { addUser, selectToken } from "../../redux/reducers/userReducers";
+import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
+import { userState, cred_token } from "../../models/user.types";
+import { initialUserState, selectUser } from "../../redux/reducers/userReducers";
+import Link from 'next/link';
+
 
 interface LoginFormValues {
     username:string;
@@ -13,6 +19,7 @@ export default function LoginForm() {
         password: '',
         username: ''
     }
+    const dispatch = useDispatch()
 
     
 
@@ -31,7 +38,13 @@ export default function LoginForm() {
                       console.log(res.data?.resPayload);
                       localStorage.setItem('cred-users', JSON.stringify(res.data?.resPayload));
                       localStorage.setItem('cred-token',JSON.stringify(res.headers["auth-token"]));
-
+                      const payload: initialUserState = {
+                        user: res.data?.resPayload,
+                        token: {
+                            cred_token: res.headers["auth-token"]
+                        }
+                    }
+                    dispatch(addUser(payload));
                       resetForm();
                       Router.push('/');
                     
@@ -81,9 +94,13 @@ export default function LoginForm() {
                             </div>
                             <div className="col-12">
                                 <button className="btn btn-primary py-3 px-4" type="submit">Login</button>
+                                <button className="btn btn-primary py-3 px-4" type="submit"><Link href={"/register"}>Register</Link></button>
                             </div>
                         </div>
                     </Form>
+                    
+                   
+                   
         </div>
         </Formik>
     )
