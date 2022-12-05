@@ -4,4 +4,5 @@ import { authenticateToken } from '../middlewares/verify-jwt-token.middleware';
 
 export const router = express.Router();
 
-router.post('/',UserController.createUserController);
+router.post('/', UserController.createUserController);
+router.put('/', authenticateToken, UserController.updateUserController);

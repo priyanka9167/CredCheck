@@ -53,7 +53,7 @@ const loginAuthController = (req, res, next) => __awaiter(void 0, void 0, void 0
         const userData = yield authService.loginAuth(req);
         if (userData) {
             const token = jsonwebtoken_1.default.sign({ _id: userData._id }, process.env.TOKEN_SECRET);
-            res.set('auth-token', token);
+            res.set('authorization', token);
             const resPayload = {
                 'id': userData['_id'] || '',
                 'firstname': userData['firstname'] || '',

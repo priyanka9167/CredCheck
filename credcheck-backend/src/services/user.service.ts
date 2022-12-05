@@ -13,3 +13,13 @@ export const createUser = async(user:IUsers):Promise<IUsersDocument> => {
        throw e;
     }
 }
+
+export const updateUserData = async(userId: String, updatedReq: any): Promise<any> => {
+    try {
+        const updateUser = await userModel.findByIdAndUpdate(userId, updatedReq);
+        return updateUser;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+}

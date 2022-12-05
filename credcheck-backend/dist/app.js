@@ -34,8 +34,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const db_1 = require("./db/db");
 const UserRoutes = __importStar(require("./routes/user.routes"));
 const AuthRoutes = __importStar(require("./routes/auth.routes"));
-const PaymentRoutes = __importStar(require("./routes/payment.routes"));
-const verify_jwt_token_middleware_1 = require("./middlewares/verify-jwt-token.middleware");
+const CardRoutes = __importStar(require("./routes/cards.routes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
@@ -47,8 +46,7 @@ const port = process.env.PORT;
 (0, db_1.connectDb)();
 app.use('/users', UserRoutes.router);
 app.use('/login', AuthRoutes.router);
-app.use('/payment', verify_jwt_token_middleware_1.authenticateToken, PaymentRoutes.router);
-// add custom error handler middleware as the last middleware
+app.use('/card', CardRoutes.router);
 app.use(error_handler_middleware_1.default);
 app.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);

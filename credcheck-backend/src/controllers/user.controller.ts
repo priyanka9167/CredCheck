@@ -14,3 +14,19 @@ export const createUserController = async(req:Request,res:Response, next: NextFu
       next(e);
     }
 }
+
+export const updateUserController = async(req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try{
+    let userId, payload = {...req.body};
+    if (req && req.body) {
+      userId = req.body.id;
+      delete payload['id'];
+    }
+    const userData = await userService.updateUserData(userId, payload);
+    res.send({"data":userData});
+  }
+  catch(e)
+  {
+    next(e);
+  }
+}
