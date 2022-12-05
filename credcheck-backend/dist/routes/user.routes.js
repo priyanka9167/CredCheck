@@ -32,3 +32,4 @@ const UserController = __importStar(require("../controllers/user.controller"));
 const verify_jwt_token_middleware_1 = require("../middlewares/verify-jwt-token.middleware");
 exports.router = express_1.default.Router();
 exports.router.post('/', UserController.createUserController);
+exports.router.put('/', verify_jwt_token_middleware_1.authenticateToken, UserController.updateUserController);
