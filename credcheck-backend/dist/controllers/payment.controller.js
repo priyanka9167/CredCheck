@@ -31,42 +31,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loginAuthController = void 0;
-const authService = __importStar(require("../services/auth.service"));
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const custom_error_model_1 = require("../models/custom-error.model");
-const loginAuthController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const username = req.body.username;
-    const password = req.body.password;
-    console.log(username, password);
+exports.createPaymentController = void 0;
+const paymentService = __importStar(require("../services/payment.service"));
+const createPaymentController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        if (!username || username.trim() === '') {
-            throw new custom_error_model_1.CustomError('Invalid JSON received', 400, 'Username field absent');
-        }
-        else if (!password || password.trim() === '') {
-            throw new custom_error_model_1.CustomError('Invalid JSON received', 400, 'Password field absent');
-        }
-        const userData = yield authService.loginAuth(req);
-        if (userData) {
-            const token = jsonwebtoken_1.default.sign({ _id: userData._id }, process.env.TOKEN_SECRET);
-            res.set('authorization', token);
-            const resPayload = {
-                'id': userData['_id'] || '',
-                'firstname': userData['firstname'] || '',
-                'lastname': userData['lastname'] || '',
-                'email': userData['email'] || '',
-                'status': userData['status'],
-                'username': userData['username']
-            };
-            res.send({ resPayload });
-        }
+        const userPayment = yield paymentService.payment(req.body);
+        res.send({ "payment": userPayment });
     }
-    catch (err) {
-        next(err);
+    catch (e) {
+        next(e);
     }
 });
-exports.loginAuthController = loginAuthController;
+exports.createPaymentController = createPaymentController;

@@ -28,6 +28,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.router = void 0;
 const express_1 = __importDefault(require("express"));
-const authController = __importStar(require("../controllers/auth.controller"));
+const paymentController = __importStar(require("../controllers/payment.controller"));
 exports.router = express_1.default.Router();
-exports.router.post('/', authController.loginAuthController);
+exports.router.post('/stripe/charge', paymentController.createPaymentController);
