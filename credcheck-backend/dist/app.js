@@ -47,6 +47,7 @@ const port = process.env.PORT;
 app.use('/users', UserRoutes.router);
 app.use('/login', AuthRoutes.router);
 app.use('/card', CardRoutes.router);
+// add custom error handler middleware as the last middleware
 app.use(error_handler_middleware_1.default);
 app.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);
