@@ -7,6 +7,7 @@ import { selectUser } from "../../redux/reducers/userReducers";
 import { RootState } from "../../redux/store";
 import * as Yup from "yup";
 import { useEffect } from "react";
+import { addCards } from "../../services/users/cards/cards";
 
 export default function NewCard() {
     const initialValues: cardState = {
@@ -34,7 +35,7 @@ export default function NewCard() {
                     try {
                        
                         const payload = {
-                            user_id: user.id,
+                           
                             card_name: values.card_name,
                             card_no: values.card_no,
                             card_type: values.card_type,
@@ -42,10 +43,15 @@ export default function NewCard() {
                             card_expiry: values.card_expiry,
                             card_cvv: values.card_cvv,
                             card_billing_date: values.card_billing_date,
-                            card_status: values.card_status
+                            card_status: values.card_status,
+                            user_id:user.id
                         }
-                        
-                        
+                        const res = await addCards(`/card`,payload);
+                        if(res.status === 200)
+                        {
+                            resetForm();
+                        }
+
                        
                     }
                     catch (e) {

@@ -35,13 +35,13 @@ export default function LoginForm() {
                   const res = await login(payload);
                   if(res.status === 200)
                   {
-                      console.log(res.data?.resPayload);
+                      console.log(res.headers["authorization"]);
                       localStorage.setItem('cred-users', JSON.stringify(res.data?.resPayload));
-                      localStorage.setItem('cred-token',JSON.stringify(res.headers["auth-token"]));
+                      localStorage.setItem('cred-token',JSON.stringify(res.headers["authorization"]));
                       const payload: initialUserState = {
                         user: res.data?.resPayload,
                         token: {
-                            cred_token: res.headers["auth-token"]
+                            cred_token: res.headers["authorization"]
                         }
                     }
                     dispatch(addUser(payload));
