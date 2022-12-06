@@ -42,6 +42,7 @@ const custom_error_model_1 = require("../models/custom-error.model");
 const loginAuthController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const username = req.body.username;
     const password = req.body.password;
+    console.log(username, password);
     try {
         if (!username || username.trim() === '') {
             throw new custom_error_model_1.CustomError('Invalid JSON received', 400, 'Username field absent');
@@ -52,9 +53,14 @@ const loginAuthController = (req, res, next) => __awaiter(void 0, void 0, void 0
         const userData = yield authService.loginAuth(req);
         if (userData) {
             const token = jsonwebtoken_1.default.sign({ _id: userData._id }, process.env.TOKEN_SECRET);
+<<<<<<<<< Temporary merge branch 1
             res.set('auth-token', token);
             const resPayload = {
                 'id': userData['_id'] || '',
+=========
+            res.set('authorization', token);
+            const resPayload = {
+>>>>>>>>> Temporary merge branch 2
                 'firstname': userData['firstname'] || '',
                 'lastname': userData['lastname'] || '',
                 'email': userData['email'] || '',

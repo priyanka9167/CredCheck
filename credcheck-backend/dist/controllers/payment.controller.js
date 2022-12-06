@@ -32,37 +32,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-<<<<<<<<< Temporary merge branch 1
-exports.createUserController = void 0;
-=========
-exports.updateUserController = exports.createUserController = void 0;
->>>>>>>>> Temporary merge branch 2
-const userService = __importStar(require("../services/user.service"));
-const createUserController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.createPaymentController = void 0;
+const paymentService = __importStar(require("../services/payment.service"));
+const createPaymentController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const userData = yield userService.createUser(req.body);
-        res.send({ "data": userData });
+        const userPayment = yield paymentService.payment(req.body);
+        res.send({ "payment": userPayment });
     }
     catch (e) {
         next(e);
     }
 });
-exports.createUserController = createUserController;
-<<<<<<<<< Temporary merge branch 1
-=========
-const updateUserController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        let userId, payload = Object.assign({}, req.body);
-        if (req && req.body) {
-            userId = req.body.id;
-            delete payload['id'];
-        }
-        const userData = yield userService.updateUserData(userId, payload);
-        res.send({ "data": userData });
-    }
-    catch (e) {
-        next(e);
-    }
-});
-exports.updateUserController = updateUserController;
->>>>>>>>> Temporary merge branch 2
+exports.createPaymentController = createPaymentController;

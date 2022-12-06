@@ -12,7 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+<<<<<<<<< Temporary merge branch 1
 exports.createUser = void 0;
+=========
+exports.updateUserData = exports.createUser = void 0;
+>>>>>>>>> Temporary merge branch 2
 const user_schema_1 = __importDefault(require("../models/users/user.schema"));
 const createUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -25,3 +29,17 @@ const createUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.createUser = createUser;
+<<<<<<<<< Temporary merge branch 1
+=========
+const updateUserData = (userId, updatedReq) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const updateUser = yield user_schema_1.default.findByIdAndUpdate(userId, updatedReq);
+        return updateUser;
+    }
+    catch (e) {
+        console.log(e);
+        throw e;
+    }
+});
+exports.updateUserData = updateUserData;
+>>>>>>>>> Temporary merge branch 2

@@ -5,9 +5,9 @@ const API_URL = process.env.NEXT_PUBLIC_ENDPOINT_AUTH;
 
 
 const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
-    // const token = JSON.parse(localStorage.getItem("token") || '{}');
-     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzgyYWI3NzY0YWE1ZDMzYTUxYzNkMDMiLCJpYXQiOjE2Njk2MDAzOTJ9.IjSbPY-ocBB4oLlHY1kTl_xNmB7BxEJ0TwK7bNdgNFU';
-     config.headers["Authorization"] = `Bearer ${token}`;
+     const token = JSON.parse(localStorage.getItem("cred-token") || '{}');
+    // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzgyYWI3NzY0YWE1ZDMzYTUxYzNkMDMiLCJpYXQiOjE2Njk2MDAzOTJ9.IjSbPY-ocBB4oLlHY1kTl_xNmB7BxEJ0TwK7bNdgNFU';
+     config.headers["authorization"] = `${token}`;
      return config;
   };
 

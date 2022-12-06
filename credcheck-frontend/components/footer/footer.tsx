@@ -1,6 +1,6 @@
 export default function Footer(): JSX.Element {
     return (
-        <div className="container-fluid bg-light footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
+        <div className="container-fluid bg-light footer  wow fadeIn" data-wow-delay="0.1s">
         <div className="container">
             <div className="row g-5">
                 <div className="col-md-12">

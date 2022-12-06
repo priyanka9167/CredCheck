@@ -22,6 +22,41 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+<<<<<<<<< Temporary merge branch 1
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = __importStar(require("mongoose")), Mongoose = mongoose_1;
+const cardsSchema = new Mongoose.Schema({
+    cardNumber: {
+        type: String,
+        required: true
+    },
+    CVV: {
+        type: String,
+        required: true
+    },
+    expiryDate: {
+        type: Date,
+        required: true
+    },
+    bankName: {
+        type: String,
+        required: true
+    },
+    cardType: {
+        type: String,
+        required: true
+    },
+    billingCycle: {
+        type: Date,
+        required: true
+    },
+    status: {
+        type: String,
+        required: true
+    }
+});
+const cardModel = mongoose_1.default.model('card', cardsSchema);
+=========
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -106,4 +141,5 @@ cardsSchema.statics.findByUserId = function (id) {
     });
 };
 const cardModel = mongoose_1.default.model("card", cardsSchema);
+>>>>>>>>> Temporary merge branch 2
 exports.default = cardModel;

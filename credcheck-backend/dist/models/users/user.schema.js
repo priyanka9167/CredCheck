@@ -69,7 +69,11 @@ const userSchema = new Mongoose.Schema({
     },
     dob: {
         type: Date
+<<<<<<<<< Temporary merge branch 1
     }
+=========
+    },
+>>>>>>>>> Temporary merge branch 2
 });
 userSchema.statics.findOneOrCreate = function ({ firstname, lastname, username, email, password, gender, phone_number, address, status, dob }) {
     return __awaiter(this, void 0, void 0, function* () {

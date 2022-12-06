@@ -29,5 +29,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.router = void 0;
 const express_1 = __importDefault(require("express"));
 const UserController = __importStar(require("../controllers/user.controller"));
+<<<<<<<<< Temporary merge branch 1
 exports.router = express_1.default.Router();
-exports.router.post('/', verify_jwt_token_middleware_1.authenticateToken, UserController.createUserController);
+exports.router.post('/', UserController.createUserController);
+=========
+const verify_jwt_token_middleware_1 = require("../middlewares/verify-jwt-token.middleware");
+exports.router = express_1.default.Router();
+exports.router.post('/', UserController.createUserController);
+exports.router.put('/', verify_jwt_token_middleware_1.authenticateToken, UserController.updateUserController);
+>>>>>>>>> Temporary merge branch 2

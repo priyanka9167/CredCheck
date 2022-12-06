@@ -41,18 +41,21 @@ img{
 }
 
 .cred-card {
-  margin: 50px auto;
+  // margin: 50px auto;
   display: table;
   position: relative;
+  margin-top: 20px;
 }
 
 .front .cardnumber ul {
-  margin-left: -15px;
+  // margin-left: -15px;
+
   position: absolute;
-  top: 35%;
+  top: 29%;
   display: table-cell;
   vertical-align: middle;
   text-shadow: 1px 3px 4px rgba(150, 150, 150, 1);
+  right: 17px;
 }
 
 .front .cardnumber ul li {
@@ -74,11 +77,17 @@ img{
 
 .cred-card .front{
   background-color: #0066FF;
+  color: #FFF;
   Height: 130px;
   width: 300px;
   padding: 25px;
   border-radius: 10px;
   transform: rotateX(0deg) rotateY(0deg);
+}
+.cred-card .front.blocked{
+  opacity:0.2;
+background-color: Black;
+z-index:10;
 }
 
 .signature{
@@ -116,4 +125,14 @@ img{
 }
 .small{
   font-size:10px;
+}
+.navbar{margin-bottom: 50px;}
+
+.footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+ padding: 20px 0;
+ margin-top: 50px;
 }

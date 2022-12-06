@@ -7,13 +7,15 @@ import {connectDb} from "./db/db";
 import * as UserRoutes from './routes/user.routes';
 import * as AuthRoutes from './routes/auth.routes';
 import * as CardRoutes from './routes/cards.routes';
+import * as PaymentRoutes from './routes/payment.routes';
+import { authenticateToken } from './middlewares/verify-jwt-token.middleware';
 
 
 dotenv.config();
 
 const app:Express = express();
 app.use(cors({
-  exposedHeaders: ['Content-Length', 'auth-token'],
+  exposedHeaders: ['Content-Length', 'authorization'],
 }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -23,11 +25,11 @@ connectDb();
 
 app.use('/users',UserRoutes.router);
 app.use('/login', AuthRoutes.router);
-app.use('/card', CardRoutes.router);
+app.use('/card',authenticateToken, CardRoutes.router);
 
 // add custom error handler middleware as the last middleware
 app.use(errorHandler);
-
+app.use('/payment',authenticateToken,PaymentRoutes.router);
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });
