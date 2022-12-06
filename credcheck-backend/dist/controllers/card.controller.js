@@ -32,30 +32,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateUserController = exports.createUserController = void 0;
-const userService = __importStar(require("../services/user.service"));
-const createUserController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getUserCardDetails = exports.addCardDetails = void 0;
+const cardService = __importStar(require("./../services/card.service"));
+const addCardDetails = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const userData = yield userService.createUser(req.body);
-        res.send({ "data": userData });
+        const cardData = yield cardService.createCard(req.body);
+        res.send({ "data": cardData });
     }
-    catch (e) {
-        next(e);
+    catch (err) {
+        next(err);
     }
 });
-exports.createUserController = createUserController;
-const updateUserController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.addCardDetails = addCardDetails;
+const getUserCardDetails = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        let userId, payload = Object.assign({}, req.body);
-        if (req && req.body) {
-            userId = req.body.id;
-            delete payload['id'];
-        }
-        const userData = yield userService.updateUserData(userId, payload);
-        res.send({ "data": userData });
+        const cardData = yield cardService.getCards(req.params.id);
+        res.send({ "data": cardData });
     }
-    catch (e) {
-        next(e);
+    catch (err) {
+        next(err);
     }
 });
-exports.updateUserController = updateUserController;
+exports.getUserCardDetails = getUserCardDetails;

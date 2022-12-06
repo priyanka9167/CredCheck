@@ -22,37 +22,88 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose")), Mongoose = mongoose_1;
 const cardsSchema = new Mongoose.Schema({
-    cardNumber: {
+    card_name: {
         type: String,
-        required: true
+        required: true,
     },
-    CVV: {
+    card_no: {
         type: String,
-        required: true
+        required: true,
     },
-    expiryDate: {
+    card_type: {
+        type: String,
+        required: true,
+    },
+    card_expiry: {
         type: Date,
-        required: true
+        required: true,
     },
-    bankName: {
+    card_bank_name: {
         type: String,
-        required: true
+        required: true,
     },
-    cardType: {
+    card_cvv: {
         type: String,
-        required: true
+        required: true,
     },
-    billingCycle: {
+    card_billing_date: {
         type: Date,
-        required: true
+        required: true,
     },
-    status: {
+    card_status: {
         type: String,
-        required: true
-    }
+        required: true,
+    },
+    user_id: {
+        type: Mongoose.Schema.Types.ObjectId,
+        ref: "users",
+        required: true,
+    },
 });
-const cardModel = mongoose_1.default.model('card', cardsSchema);
+cardsSchema.statics.findOneOrCreate = function ({ card_name, card_no, card_type, card_expiry, card_bank_name, card_cvv, card_billing_date, card_status, user_id, }) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const cardRecord = yield this.findOne({
+            card_no,
+            card_cvv,
+        });
+        if (cardRecord) {
+            return "Card Already exist";
+        }
+        else {
+            return this.create({
+                card_name,
+                card_no,
+                card_type,
+                card_expiry,
+                card_bank_name,
+                card_cvv,
+                card_billing_date,
+                card_status,
+                user_id,
+            });
+        }
+    });
+};
+cardsSchema.statics.findByUserId = function (id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        console.log("inside card model", id);
+        const cardRecord = yield this.find({
+            user_id: { $gte: id },
+        });
+        return cardRecord;
+    });
+};
+const cardModel = mongoose_1.default.model("card", cardsSchema);
 exports.default = cardModel;

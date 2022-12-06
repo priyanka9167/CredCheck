@@ -1,5 +1,6 @@
 import { Types } from "mongoose";
 import { Document,Model } from "mongoose";
+import { ICards,ICardsDocument } from "./cards.types";
 
 export interface IUsers{
     firstname:string,
@@ -12,6 +13,7 @@ export interface IUsers{
     address:string,
     status:string,
     dob:Date,
+    
  }
 
  export interface IUserLoginCred {
@@ -41,3 +43,4 @@ export interface IUsersModel extends Model<IUsersDocument> {
     ) => Promise<IUsersDocument>;
 
 }
+

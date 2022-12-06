@@ -1,6 +1,7 @@
-import { withFormik, FormikProps, Field, Form, Formik, ErrorMessage } from "formik";
+import { withFormik, FormikProps, Field, Form, Formik, ErrorMessage ,FormikHelpers} from "formik";
 import * as Yup from "yup";
 import { userRegistration } from "../../services/users/users";
+import Router from "next/router";
 
 interface UserFormValues {
   firstname: string;
@@ -23,7 +24,7 @@ export default function RegisterForm() {
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={async(values, actions) => {
+      onSubmit={async(values,{resetForm}:FormikHelpers<UserFormValues>) => {
         const payload = {
           firstname:values.firstname,
           lastname:values.lastname,
@@ -32,7 +33,12 @@ export default function RegisterForm() {
           password:values.password
         }
         const res = await userRegistration(payload);
-        console.log(res);
+        if(res.status === 200)
+        {
+          
+          resetForm();
+          Router.push('/login');
+        }
 
        }}
       validationSchema={Yup.object().shape({
