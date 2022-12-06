@@ -53,14 +53,9 @@ const loginAuthController = (req, res, next) => __awaiter(void 0, void 0, void 0
         const userData = yield authService.loginAuth(req);
         if (userData) {
             const token = jsonwebtoken_1.default.sign({ _id: userData._id }, process.env.TOKEN_SECRET);
-<<<<<<<<< Temporary merge branch 1
-            res.set('auth-token', token);
-            const resPayload = {
-                'id': userData['_id'] || '',
-=========
             res.set('authorization', token);
             const resPayload = {
->>>>>>>>> Temporary merge branch 2
+                'id': userData['_id'] || '',
                 'firstname': userData['firstname'] || '',
                 'lastname': userData['lastname'] || '',
                 'email': userData['email'] || '',

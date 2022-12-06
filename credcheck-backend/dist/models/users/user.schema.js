@@ -1,5 +1,4 @@
 "use strict";
-"use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -69,11 +68,7 @@ const userSchema = new Mongoose.Schema({
     },
     dob: {
         type: Date
-<<<<<<<<< Temporary merge branch 1
-    }
-=========
     },
->>>>>>>>> Temporary merge branch 2
 });
 userSchema.statics.findOneOrCreate = function ({ firstname, lastname, username, email, password, gender, phone_number, address, status, dob }) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -99,5 +94,11 @@ userSchema.statics.findOneOrCreate = function ({ firstname, lastname, username, 
         }
     });
 };
+userSchema.statics.findUser = (_id) => __awaiter(void 0, void 0, void 0, function* () {
+    const user_record = yield userModel.findOne({
+        _id
+    });
+    return user_record;
+});
 const userModel = mongoose_1.default.model('user', userSchema);
 exports.default = userModel;

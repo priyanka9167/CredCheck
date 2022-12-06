@@ -32,11 +32,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-<<<<<<<<< Temporary merge branch 1
-exports.createUserController = void 0;
-=========
 exports.updateUserController = exports.createUserController = void 0;
->>>>>>>>> Temporary merge branch 2
 const userService = __importStar(require("../services/user.service"));
 const createUserController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -48,8 +44,6 @@ const createUserController = (req, res, next) => __awaiter(void 0, void 0, void 
     }
 });
 exports.createUserController = createUserController;
-<<<<<<<<< Temporary merge branch 1
-=========
 const updateUserController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         let userId, payload = Object.assign({}, req.body);
@@ -65,4 +59,3 @@ const updateUserController = (req, res, next) => __awaiter(void 0, void 0, void 
     }
 });
 exports.updateUserController = updateUserController;
->>>>>>>>> Temporary merge branch 2

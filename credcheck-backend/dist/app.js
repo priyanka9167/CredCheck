@@ -34,10 +34,10 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const db_1 = require("./db/db");
 const UserRoutes = __importStar(require("./routes/user.routes"));
 const AuthRoutes = __importStar(require("./routes/auth.routes"));
-<<<<<<<<< Temporary merge branch 1
-=========
 const CardRoutes = __importStar(require("./routes/cards.routes"));
->>>>>>>>> Temporary merge branch 2
+const PaymentRoutes = __importStar(require("./routes/payment.routes"));
+const verify_jwt_token_middleware_1 = require("./middlewares/verify-jwt-token.middleware");
+const email_1 = require("./email/email");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
@@ -47,12 +47,10 @@ app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use(body_parser_1.default.json());
 const port = process.env.PORT;
 (0, db_1.connectDb)();
+(0, email_1.sendEmail)();
 app.use('/users', UserRoutes.router);
 app.use('/login', AuthRoutes.router);
-<<<<<<<<< Temporary merge branch 1
-=========
-app.use('/card', CardRoutes.router);
->>>>>>>>> Temporary merge branch 2
+app.use('/card', verify_jwt_token_middleware_1.authenticateToken, CardRoutes.router);
 // add custom error handler middleware as the last middleware
 app.use(error_handler_middleware_1.default);
 app.use('/payment', verify_jwt_token_middleware_1.authenticateToken, PaymentRoutes.router);

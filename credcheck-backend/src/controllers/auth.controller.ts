@@ -3,6 +3,7 @@ import {NextFunction, Request, Response} from 'express';
 import jwt from 'jsonwebtoken';
 import { CustomError } from '../models/custom-error.model';
 
+
 export const loginAuthController = async(req: Request, res: Response, next: NextFunction): Promise<void> => {
     const username = req.body.username;
     const password = req.body.password;
@@ -27,6 +28,7 @@ export const loginAuthController = async(req: Request, res: Response, next: Next
                 'username': userData['username']
             }
             res.send ({resPayload});
+          
 
         }     
     } catch (err) {

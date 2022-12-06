@@ -80,6 +80,14 @@ userSchema.statics.findOneOrCreate = async function (
     }
 }
 
+userSchema.statics.findUser =async (_id) => {
+    const user_record = await userModel.findOne({
+            _id
+    });
+    return user_record;
+
+}
+
 
 
 

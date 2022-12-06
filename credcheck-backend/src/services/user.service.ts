@@ -23,3 +23,14 @@ export const updateUserData = async(userId: String, updatedReq: any): Promise<an
         throw e;
     }
 }
+
+export const getUser =async (id:String) => {
+    try{
+        const user = await userModel.findUser(id); 
+        return user 
+       }
+       catch(e){
+          console.log(e);
+          throw e;
+       } 
+}
