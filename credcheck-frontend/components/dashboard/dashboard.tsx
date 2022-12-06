@@ -38,7 +38,9 @@ export default function Dashboard() {
             <span>
                 <Link className='btn btn-primary btn-addnew' href="/addcard">Add Card</Link>
             </span>
-            
+            <span>
+                <Link className='btn btn-primary' href="/addcard">Payment</Link>
+            </span>
         </div>
         </div>
       

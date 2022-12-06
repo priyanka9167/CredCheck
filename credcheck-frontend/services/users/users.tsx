@@ -1,5 +1,4 @@
 import axios from 'axios';
-import api from '../../interceptors/api';
 import { API_CONSTANTS } from '../../constants/api_endpoints.constants';
 
 const userRegistration = async(payload: any): Promise<any> => {
