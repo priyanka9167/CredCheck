@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { API_CONSTANTS } from '../../../constants/api_endpoints.constants';
 import api from '../../../interceptors/api';
 
 
@@ -24,3 +25,12 @@ export const getCards = async(route:string): Promise<any> => {
         return err
     }
 }
+
+export const fetchCardDetails = async (id: String): Promise<any> => {
+    try {
+        let response = await api.get(`${API_CONSTANTS.BASE_URL}${API_CONSTANTS.CARD_DETAIL}/${id}`);
+        return response;
+    } catch (err) {
+        return err;
+    }
+} 

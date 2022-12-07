@@ -32,7 +32,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+<<<<<<< HEAD
 exports.getUserCardDetails = exports.addCardDetails = void 0;
+=======
+exports.getCardDetails = exports.getUserCardDetails = exports.addCardDetails = void 0;
+>>>>>>> origin/UAT
 const cardService = __importStar(require("./../services/card.service"));
 const addCardDetails = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -54,3 +58,13 @@ const getUserCardDetails = (req, res, next) => __awaiter(void 0, void 0, void 0,
     }
 });
 exports.getUserCardDetails = getUserCardDetails;
+const getCardDetails = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const cardDetail = yield cardService.getCardDetail(req.params.id);
+        res.send({ cardDetail });
+    }
+    catch (err) {
+        next(err);
+    }
+});
+exports.getCardDetails = getCardDetails;
