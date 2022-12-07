@@ -7,6 +7,7 @@ import {connectDb} from "./db/db";
 import * as UserRoutes from './routes/user.routes';
 import * as AuthRoutes from './routes/auth.routes';
 import * as CardRoutes from './routes/cards.routes';
+import * as TransactionRoutes from './routes/transaction.routes';
 import * as PaymentRoutes from './routes/payment.routes';
 import { authenticateToken } from './middlewares/verify-jwt-token.middleware';
 import {sendEmail} from './email/email';
@@ -27,6 +28,7 @@ sendEmail();
 app.use('/users',UserRoutes.router);
 app.use('/login', AuthRoutes.router);
 app.use('/card',authenticateToken, CardRoutes.router);
+app.use('/transaction', authenticateToken, TransactionRoutes.router);
 
 // add custom error handler middleware as the last middleware
 app.use(errorHandler);
