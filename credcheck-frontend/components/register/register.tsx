@@ -25,20 +25,27 @@ export default function RegisterForm() {
     <Formik
       initialValues={initialValues}
       onSubmit={async(values,{resetForm}:FormikHelpers<UserFormValues>) => {
-        const payload = {
-          firstname:values.firstname,
-          lastname:values.lastname,
-          username:values.username,
-          email:values.email,
-          password:values.password
+        try{
+          const payload = {
+            firstname:values.firstname,
+            lastname:values.lastname,
+            username:values.username,
+            email:values.email,
+            password:values.password
+          }
+          const res = await userRegistration(payload);
+          if(res.status === 200)
+          {
+             resetForm();
+            Router.push('/login');
+          }
+         
         }
-        const res = await userRegistration(payload);
-        if(res.status === 200)
+       catch(e)
         {
           
-          resetForm();
-          Router.push('/login');
         }
+      
 
        }}
       validationSchema={Yup.object().shape({

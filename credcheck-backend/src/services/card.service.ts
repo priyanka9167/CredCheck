@@ -28,7 +28,28 @@ export const getCards = async (id:string) :Promise<(ICardsDocument & { _id: Type
 export const updateCards = async (id:String, payload: any) :Promise<any> => {
     try{
         const updatedCard = await cardModel.findByIdAndUpdate(id, payload);
+        console.log("inside update",updatedCard);
         return updatedCard
+       } catch (err) {
+        console.log(err);
+        throw err;
+       }
+}
+export const getCardDetail = async (id:String): Promise<any> => {
+    try  {
+        const cardDetail = await cardModel.findById(id);    
+        return cardDetail;
+
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+}
+    
+export const getAllCards = async():Promise<(ICardsDocument[]) | null> => {
+    try{
+        const cards = await cardModel.find();
+        return cards
     }
     catch(err)
     {

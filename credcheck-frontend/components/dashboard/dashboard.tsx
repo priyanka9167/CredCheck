@@ -1,6 +1,3 @@
-import Image from 'next/image';
-import card from '../../public/card.png'
-import card2 from '../../public/card2.png';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { selectToken } from "../../redux/reducers/userReducers";
@@ -8,23 +5,40 @@ import { useSelector, TypedUseSelectorHook } from "react-redux";
 import { userState, cred_token } from "../../models/user.types";
 import { selectUser } from "../../redux/reducers/userReducers";
 import { RootState } from "../../redux/store";
-import { getCards } from '../../services/users/cards/cards';
+import { getCards,updateCard } from '../../services/users/cards/cards';
 
 
 export default function Dashboard() {
 
-    const [cards, setCards] = useState();
+    const [cards, setCards] = useState<any[]>([]);
 
     const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
     const user: userState = useTypedSelector(selectUser);
     const token: cred_token = useTypedSelector(selectToken);
 
-
+    const blockCard = async(id:any,value:String) => {
+        if(cards)
+        {
+            console.log(id)
+            let card = cards.map((data:any) => {
+                if(data._id === id)
+                {
+                    return data
+                }
+        });
+        card[0]['card_status'] = value;
+        const res = await updateCard(cards[0]);
+       if(res.status === 200)
+       {
+         getUserCards();
+       }
+        
+    }
+    }
 
     const getUserCards = async () => {
         try {
             if (!(user.email === '')) {
-                console.log("hello")
                 const res = await getCards(`/card/user/${user.id}`);
                 console.log(res);
                 if (res.status === 200) {
@@ -53,7 +67,7 @@ export default function Dashboard() {
             </span>
             {
             cards && cards.map(data => 
-              data.card_status === 'Blocked' ? 
+              data.card_status === 'BLOCKED' ? 
               (
                 <div className="cred-card">
                 <div className="front side blocked">
@@ -83,13 +97,15 @@ export default function Dashboard() {
                         </tbody>
                     </table>
                 </div>
-                <button className="btn btn-primary m-1">Edit</button>
-                <button className="btn btn-primary m-1">Blocked</button>
+               
+                <button className="btn btn-primary m-1" onClick={() => blockCard(data?._id,'ACTIVE')}>ACTIVE</button>
 
             </div>
               ):(
-                <Link href={'/'}>
+               
+                    
                 <div className="cred-card">
+                     <Link href={`/carddetail/${data?._id}`}>
                     <div className="front side">
                         <span className="companyname">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg"></img>
@@ -117,11 +133,12 @@ export default function Dashboard() {
                             </tbody>
                         </table>
                     </div>
-                    <button className="btn btn-primary m-1">Edit</button>
-                    <button className="btn btn-primary m-1">Blocked</button>
+                    </Link>
+                    {/* <button className="btn btn-primary m-1">Edit</button> */}
+                    <button className="btn btn-primary m-1" onClick={() => blockCard(data?._id,"BLOCKED")}>Blocked</button>
 
                 </div>
-                </Link>
+              
               )
              )
         }

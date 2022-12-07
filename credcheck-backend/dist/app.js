@@ -37,6 +37,7 @@ const AuthRoutes = __importStar(require("./routes/auth.routes"));
 const CardRoutes = __importStar(require("./routes/cards.routes"));
 const PaymentRoutes = __importStar(require("./routes/payment.routes"));
 const verify_jwt_token_middleware_1 = require("./middlewares/verify-jwt-token.middleware");
+const email_1 = require("./email/email");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
@@ -46,6 +47,7 @@ app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use(body_parser_1.default.json());
 const port = process.env.PORT;
 (0, db_1.connectDb)();
+(0, email_1.sendEmail)();
 app.use('/users', UserRoutes.router);
 app.use('/login', AuthRoutes.router);
 app.use('/card', verify_jwt_token_middleware_1.authenticateToken, CardRoutes.router);

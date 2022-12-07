@@ -88,6 +88,12 @@ cardsSchema.statics.findByUserId = async function (
     
   };
 
+  cardsSchema.statics.findAll = async function (): Promise<ICardsDocument[]>  {
+    const cardRecord = await this.find();
+    return cardRecord;
+   };
+
+   
 
 
 const cardModel = mongoose.model<ICardsDocument, ICardsModel>(

@@ -126,7 +126,6 @@ z-index:10;
 .small{
   font-size:10px;
 }
-.navbar{margin-bottom: 50px;}
 
 .footer{
   position: fixed;
@@ -135,4 +134,9 @@ z-index:10;
   width: 100%;
  padding: 20px 0;
  margin-top: 50px;
+}
+
+.card-elemnt {
+  border: 1px solid red;
+  padding: 10px;
 }

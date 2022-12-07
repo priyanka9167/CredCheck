@@ -76,7 +76,7 @@ userSchema.statics.findOneOrCreate = function ({ firstname, lastname, username, 
             username, email
         });
         if (userRecord) {
-            return 'User Already exist';
+            throw 'User Exists';
         }
         else {
             return this.create({
@@ -94,5 +94,11 @@ userSchema.statics.findOneOrCreate = function ({ firstname, lastname, username, 
         }
     });
 };
+userSchema.statics.findUser = (_id) => __awaiter(void 0, void 0, void 0, function* () {
+    const user_record = yield userModel.findOne({
+        _id
+    });
+    return user_record;
+});
 const userModel = mongoose_1.default.model('user', userSchema);
 exports.default = userModel;

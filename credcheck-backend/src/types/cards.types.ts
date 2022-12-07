@@ -32,5 +32,7 @@ export interface ICardsModel extends Model<ICardsDocument> {
   ) => Promise<ICardsDocument>;
 
   findByUserId(id:string):Promise<ICardsDocument & { _id: Types.ObjectId}[]>;
+
+  findAll():Promise<ICardsDocument[]>;
  
 }

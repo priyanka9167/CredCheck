@@ -1,5 +1,7 @@
 import mongoose, * as Mongoose from "mongoose";
 import { IUsersDocument,IUsersModel,IUsers, IUserLoginCred } from "../../types/user.types";
+import { CustomError } from '../../models/custom-error.model';
+
 
 const userSchema = new Mongoose.Schema<IUsersDocument,IUsersModel>({
     firstname: {
@@ -37,7 +39,7 @@ const userSchema = new Mongoose.Schema<IUsersDocument,IUsersModel>({
     dob: { 
         type: Date
     },
-   
+    
 });
 
 
@@ -61,7 +63,7 @@ userSchema.statics.findOneOrCreate = async function (
     });
     if(userRecord)
     {
-        return 'User Already exist'
+        throw 'User Exists'
     }
     else{
         return this.create({
@@ -80,7 +82,13 @@ userSchema.statics.findOneOrCreate = async function (
     }
 }
 
+userSchema.statics.findUser =async (_id) => {
+    const user_record = await userModel.findOne({
+            _id
+    });
+    return user_record;
 
+}
 
 
 
