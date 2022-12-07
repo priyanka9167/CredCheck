@@ -25,3 +25,15 @@ export const getCards = async (id:string) :Promise<(ICardsDocument & { _id: Type
     }
 }
 
+export const getCardDetail = async (id:String): Promise<any> => {
+    try  {
+        const cardDetail = await cardModel.findById(id);    
+        return cardDetail;
+
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+    
+}
+

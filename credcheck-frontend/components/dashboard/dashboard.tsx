@@ -1,6 +1,3 @@
-import Image from 'next/image';
-import card from '../../public/card.png'
-import card2 from '../../public/card2.png';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { selectToken } from "../../redux/reducers/userReducers";
@@ -24,7 +21,6 @@ export default function Dashboard() {
     const getUserCards = async () => {
         try {
             if (!(user.email === '')) {
-                console.log("hello")
                 const res = await getCards(`/card/user/${user.id}`);
                 console.log(res);
                 if (res.status === 200) {
@@ -88,7 +84,8 @@ export default function Dashboard() {
 
             </div>
               ):(
-                <Link href={'/'}>
+                <Link href={`/carddetail/${data?._id}`}>
+                    
                 <div className="cred-card">
                     <div className="front side">
                         <span className="companyname">

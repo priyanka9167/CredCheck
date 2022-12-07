@@ -21,3 +21,12 @@ export const getUserCardDetails =async (req: Request, res: Response, next: NextF
     }
 }
 
+export const getCardDetails = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+        const cardDetail = await cardService.getCardDetail(req.params.id);
+        res.send({cardDetail});
+    } catch (err) {
+        next(err);
+    }
+}
+
