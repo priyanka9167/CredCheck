@@ -36,6 +36,8 @@ const getCards = (id) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getCards = getCards;
+<<<<<<< HEAD
+=======
 const getCardDetail = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const cardDetail = yield cards_schema_1.default.findById(id);
@@ -47,6 +49,7 @@ const getCardDetail = (id) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getCardDetail = getCardDetail;
+>>>>>>> origin/UAT
 const getAllCards = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const cards = yield cards_schema_1.default.find();

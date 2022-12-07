@@ -76,7 +76,7 @@ userSchema.statics.findOneOrCreate = function ({ firstname, lastname, username, 
             username, email
         });
         if (userRecord) {
-            return 'User Already exist';
+            throw 'User Exists';
         }
         else {
             return this.create({
