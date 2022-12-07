@@ -9,7 +9,7 @@ import * as AuthRoutes from './routes/auth.routes';
 import * as CardRoutes from './routes/cards.routes';
 import * as PaymentRoutes from './routes/payment.routes';
 import { authenticateToken } from './middlewares/verify-jwt-token.middleware';
-
+import {sendEmail} from './email/email';
 
 dotenv.config();
 
@@ -21,6 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 const port = process.env.PORT;
 connectDb();
+sendEmail();
 
 
 app.use('/users',UserRoutes.router);

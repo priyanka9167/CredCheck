@@ -105,5 +105,11 @@ cardsSchema.statics.findByUserId = function (id) {
         return cardRecord;
     });
 };
+cardsSchema.statics.findAll = function () {
+    return __awaiter(this, void 0, void 0, function* () {
+        const cardRecord = yield this.find();
+        return cardRecord;
+    });
+};
 const cardModel = mongoose_1.default.model("card", cardsSchema);
 exports.default = cardModel;

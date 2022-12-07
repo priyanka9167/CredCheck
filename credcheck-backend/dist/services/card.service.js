@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getCardDetail = exports.getCards = exports.createCard = void 0;
+exports.getAllCards = exports.getCardDetail = exports.getCards = exports.createCard = void 0;
 const cards_schema_1 = __importDefault(require("../models/cards/cards.schema"));
 const createCard = (card) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -47,3 +47,14 @@ const getCardDetail = (id) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getCardDetail = getCardDetail;
+const getAllCards = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const cards = yield cards_schema_1.default.find();
+        return cards;
+    }
+    catch (err) {
+        console.log(err);
+        throw err;
+    }
+});
+exports.getAllCards = getAllCards;

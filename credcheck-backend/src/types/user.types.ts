@@ -42,5 +42,7 @@ export interface IUsersModel extends Model<IUsersDocument> {
         }:IUsers
     ) => Promise<IUsersDocument>;
 
+    findUser:(_id:String) => Promise<IUsersDocument>
+
 }
 

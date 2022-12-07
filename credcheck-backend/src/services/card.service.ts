@@ -34,6 +34,17 @@ export const getCardDetail = async (id:String): Promise<any> => {
         console.log(err);
         throw err;
     }
+}
     
+export const getAllCards = async():Promise<(ICardsDocument[]) | null> => {
+    try{
+        const cards = await cardModel.find();
+        return cards
+    }
+    catch(err)
+    {
+        console.log(err);
+        throw err;
+    }
 }
 
