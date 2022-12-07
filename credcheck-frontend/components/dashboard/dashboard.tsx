@@ -24,7 +24,7 @@ export default function Dashboard() {
     const getUserCards = async () => {
         try {
             if (!(user.email === '')) {
-                console.log("hello")
+               
                 const res = await getCards(`/card/user/${user.id}`);
                 console.log(res);
                 if (res.status === 200) {
