@@ -3,5 +3,6 @@ export const API_CONSTANTS = Object.freeze({
     REGISTER: 'users',
     LOGIN: 'login',
     PAYMENT: 'payment/stripe/charge',
-    CARD_DETAIL: 'card/'
+    CARD_DETAIL: 'card/',
+    TRANSACTION: 'transaction/'
 });

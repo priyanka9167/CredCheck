@@ -2,6 +2,15 @@ import { CardElement, useStripe, useElements, CardNumberElement, CardCvcElement,
 // import styles from './payemntgateway.scss';
 import { useRouter } from "next/router";
 import  confirmPayment  from '../../services/payment';
+import { useEffect, useState } from 'react';
+import { selectToken } from "../../redux/reducers/userReducers";
+import Router from "next/router";
+import { useSelector, TypedUseSelectorHook } from "react-redux";
+import { userState, cred_token } from "../../models/user.types";
+import { selectUser } from "../../redux/reducers/userReducers";
+import { fetchCardDetails } from "../../services/users/cards/cards"; 
+import { RootState } from "../../redux/store";
+import { addTransactionDetails } from "../../services/transaction";
 
 export const PaymentGatewayForm = () => {
   const stripe = useStripe();
@@ -9,15 +18,36 @@ export const PaymentGatewayForm = () => {
   const router = useRouter();
   let errMsg = '';
 
-  const {
-    query: {amountDue, cardNumber, cardHolderName },
-  } = router;
+  const cardId: String = router.query.id;
+  const amountDue: String = router.query.amountDue;
 
-  const props = {
-    amountDue,
-    cardNumber,
-    cardHolderName
-  }
+  const [cardDetail, setCardDetail] = useState();
+
+  const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
+  const user: userState = useTypedSelector(selectUser);
+  const token: cred_token = useTypedSelector(selectToken);
+
+  const getCardDetails = async () => {
+    try {
+        if (!(user.email === '')) {
+            const res = await fetchCardDetails(cardId);
+            if (res.status === 200) {
+                setCardDetail(res?.data?.cardDetail);
+            }
+            else {
+                console.log(res?.message)
+            }
+        }
+
+    }
+    catch (e) {
+        console.log(e)
+    }
+}
+
+useEffect(() => {
+  getCardDetails();
+}, [user]);
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -31,22 +61,42 @@ export const PaymentGatewayForm = () => {
     });
 
    if (!error) {
-      console.log("Stripe 23 | token generated!", paymentMethod);
       //send token to backend here
       const { id } = paymentMethod;
-      const res = await confirmPayment(id);
-      console.log(res);
-      
+      const res = await confirmPayment(id, amountDue);
+      if (res && res.status === 200) {
+        const payload = {
+          card_no: cardDetail?.['card_no'],
+          status : "success",
+          amount_paid: amountDue,
+          due_date: cardDetail?.['card_billing_date'],
+          transaction_date: Date.now(),
+          card_id: cardDetail?.['_id']
+        }
+        const addTransactionDetail = await addTransactionDetails(payload);
+
+        if (addTransactionDetail && addTransactionDetail.status === 200) {
+          Router.push('/');
+          alert ("transaction done");
+          
+        }
+      } else {
+        console.log(res);
+      }
     } else {
       errMsg = error;
     } 
   };
     return (
         <div className = 'container'>
-          <div className="d-flex align-items-center mb-2">
-            cardNmuber : {props.cardNumber}
-            card Holder Name: {props.cardHolderName}
-            Amount to be paid: {props.amountDue}
+          <div className="d-flex align-items-center mb-2 justify-content-between">
+
+           <div> 
+           Amount to be paid:
+            {amountDue} </div>
+            <div> Card Holder Name: {cardDetail?.['card_name']}  </div>
+            <div> card Number: {cardDetail?.['card_no']} </div>
+
           </div>
             <form onSubmit={handleSubmit}>
 
