@@ -5,9 +5,9 @@ import { useSelector, TypedUseSelectorHook } from "react-redux";
 import { userState, cred_token } from "../../models/user.types";
 import { selectUser } from "../../redux/reducers/userReducers";
 import { fetchCardDetails } from "../../services/users/cards/cards"; 
+import { fetchTransactionDetails } from "../../services/transaction";
 import { RootState } from "../../redux/store";
-import Router from "next/router";
-import modalPopup from "../modalPopup/modalPopup";
+import  TransactionDetailPage  from './transactionDetails/transactionDetailPage';
 import Link from "next/link";
 
 export default function CardDetailPage() {
@@ -15,6 +15,7 @@ export default function CardDetailPage() {
     const cardId: String = router.query.id;
 
     const [cardDetail, setCardDetail] = useState();
+    const [transactionDetail, setTransactionDetail] = useState();
 
     const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
     const user: userState = useTypedSelector(selectUser);
@@ -25,6 +26,7 @@ export default function CardDetailPage() {
             if (!(user.email === '')) {
                 const res = await fetchCardDetails(cardId);
                 if (res.status === 200) {
+                    getTransactionDetails();
                     setCardDetail(res?.data?.cardDetail);
                 }
                 else {
@@ -38,22 +40,19 @@ export default function CardDetailPage() {
         }
     }
 
+    const getTransactionDetails = async () => {
+        try {
+            const res = await fetchTransactionDetails(cardId);
+            console.log("res", res);
+            setTransactionDetail(res?.data?.transactions);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     useEffect(() => {
         getCardDetails();
     }, [user]);
-
-    const redirectToPayment = async () => {
-        Router.push(
-            {
-                pathname: '/payemntGateway',
-                query: {
-                    amountDue: '$400',
-                    cardNumber: cardDetail?.['card_no'],
-                    cardHolderName: cardDetail?.['card_name']
-                }
-            });
-    }
-
 
     return (
         <div className="container">
@@ -99,13 +98,37 @@ export default function CardDetailPage() {
                 <Link  href={
                     {pathname: '/paymentgateway',
                     query: {
-                        amountDue: '$400',
-                        cardNumber: cardDetail?.['card_no'],
-                        cardHolderName: cardDetail?.['card_name']
+                        id: cardId,
+                        amountDue: "$200"
                     }}
                 }
                  className="btn btn-success"> PAY </Link>
             </div>
+            <div className="h4 mt-3 text-center mb-2"> Past Transactions</div>
+           {transactionDetail && transactionDetail?.length > 0 && <div>
+                
+                <table className="table table-sm">
+                    <thead>
+                        <tr>
+                            <th> Transaction Amount</th>
+                            <th> Transaction Date</th>
+                            <th> Transaction Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            transactionDetail && transactionDetail.map( transactionItem => {
+                                return <TransactionDetailPage
+                                    key = {transactionItem._id}
+                                    transactionData = {transactionItem}
+                                />
+                            })
+                        }
+                    </tbody>
+
+                </table>
+            </div>}
+            {!transactionDetail || transactionDetail?.length == 0 && <div className="h6; text-primary mt-4 text-center">No Transactions Available</div>}
         </div>
     )
 }
