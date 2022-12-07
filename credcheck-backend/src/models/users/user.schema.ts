@@ -39,7 +39,7 @@ const userSchema = new Mongoose.Schema<IUsersDocument,IUsersModel>({
     dob: { 
         type: Date
     },
-   
+    
 });
 
 
@@ -89,8 +89,6 @@ userSchema.statics.findUser =async (_id) => {
     return user_record;
 
 }
-
-
 
 
 
