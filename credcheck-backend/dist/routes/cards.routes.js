@@ -32,4 +32,5 @@ const CardController = __importStar(require("./../controllers/card.controller"))
 exports.router = express_1.default.Router();
 exports.router.post('/', CardController.addCardDetails);
 exports.router.get('/user/:id', CardController.getUserCardDetails);
+exports.router.put('/', CardController.updateCardDetails);
 exports.router.get('/:id', CardController.getCardDetails);

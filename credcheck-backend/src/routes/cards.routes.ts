@@ -6,4 +6,5 @@ export const router = express.Router();
 
 router.post('/', CardController.addCardDetails);
 router.get('/user/:id',CardController.getUserCardDetails);
+router.put('/',  CardController.updateCardDetails);
 router.get('/:id', CardController.getCardDetails);

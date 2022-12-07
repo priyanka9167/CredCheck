@@ -32,7 +32,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getCardDetails = exports.getUserCardDetails = exports.addCardDetails = void 0;
+exports.getCardDetails = exports.updateCardDetails = exports.getUserCardDetails = exports.addCardDetails = void 0;
 const cardService = __importStar(require("./../services/card.service"));
 const addCardDetails = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -54,6 +54,29 @@ const getUserCardDetails = (req, res, next) => __awaiter(void 0, void 0, void 0,
     }
 });
 exports.getUserCardDetails = getUserCardDetails;
+const updateCardDetails = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        let cardId, payload = Object.assign({}, req.body);
+        if (req && req.body) {
+            cardId = req.body._id;
+            delete payload['id'];
+        }
+        const cardData = yield cardService.updateCards(req.body._id, payload);
+        res.send({ "data": cardData });
+    }
+    catch (err) {
+        next(err);
+    }
+});
+exports.updateCardDetails = updateCardDetails;
+// export const blockCardDetails = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+//     try{
+//         const cardData = await cardService.blockCards(req.params.id as string);
+//         res.send({"data":cardData});
+//     }catch (err){
+//         next(err)
+//     }
+// }
 const getCardDetails = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const cardDetail = yield cardService.getCardDetail(req.params.id);
