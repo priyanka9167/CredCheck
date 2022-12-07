@@ -6,4 +6,7 @@ import { authenticateToken } from '../middlewares/verify-jwt-token.middleware';
 export const router = express.Router();
 
 router.post('/', authenticateToken , CardController.addCardDetails);
-router.get('/user/:id',authenticateToken,CardController.getUserCardDetails)
+router.get('/user/:id',authenticateToken,CardController.getUserCardDetails);
+router.put('/',  CardController.updateCardDetails);
+//router.put('/block',  CardController.blockCardDetails);
+

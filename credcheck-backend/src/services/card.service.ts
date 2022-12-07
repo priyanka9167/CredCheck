@@ -25,3 +25,33 @@ export const getCards = async (id:string) :Promise<(ICardsDocument & { _id: Type
     }
 }
 
+export const updateCards = async (id:String, payload: any) :Promise<any> => {
+    try{
+        const updatedCard = await cardModel.findByIdAndUpdate(id, payload);
+        return updatedCard
+    }
+    catch(err)
+    {
+        console.log(err);
+        throw err;
+    }
+}
+
+
+
+/* 
+export function blockCards(arg0: string) {
+    try{
+        const new_cards = await cardModel.findByIdAndUpdate();
+        return new_cards
+    }
+    catch(err)
+    {
+        console.log(err);
+        throw err;
+    }
+} */
+// export function updateCards(arg0: string) {
+//     throw new Error("Function not implemented.");
+// }
+
