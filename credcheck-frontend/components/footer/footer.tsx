@@ -4,8 +4,8 @@ export default function Footer(): JSX.Element {
         <div className="container">
             <div className="row g-5">
                 <div className="col-md-12">
-                    <h1 className="text-primary mb-4"><img className="img-fluid me-2" src="img/icon-1.png" alt="" style={{width: 45 +'px'}}/>CredCheck</h1>
-                    <span>Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit.</span>
+                    <h1 className="text-primary mb-3"><img className="img-fluid me-2" src="img/icon-1.png" alt="" style={{width: 45 +'px'}}/>CredCheck</h1>
+                    <span>Your best friend to keep your credit card bills in check.</span>
                 </div>
             </div>
         </div>
@@ -13,7 +13,7 @@ export default function Footer(): JSX.Element {
             <div className="container">
                 <div className="row">
                     <div className="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a href="#">Your Site Name</a>, All Right Reserved.
+                        &copy; <a href="#">CredCheck</a>, All Right Reserved.
                     </div>
                 </div>
             </div>

@@ -9,11 +9,13 @@ import { fetchTransactionDetails } from "../../services/transaction";
 import { RootState } from "../../redux/store";
 import  TransactionDetailPage  from './transactionDetails/transactionDetailPage';
 import Link from "next/link";
+import { setDefaultResultOrder } from "dns";
 
 export default function CardDetailPage() {
     const router = useRouter();
     const cardId: String = router.query.id;
-
+    
+    const [dueDate, setDueDate] = useState();
     const [cardDetail, setCardDetail] = useState();
     const [transactionDetail, setTransactionDetail] = useState();
 
@@ -26,8 +28,9 @@ export default function CardDetailPage() {
             if (!(user.email === '')) {
                 const res = await fetchCardDetails(cardId);
                 if (res.status === 200) {
-                    getTransactionDetails();
                     setCardDetail(res?.data?.cardDetail);
+                    setDueDate(new Date(res?.data?.cardDetail?.card_billing_date).getDate());
+                    getTransactionDetails();
                 }
                 else {
                     console.log(res?.message)
@@ -40,10 +43,15 @@ export default function CardDetailPage() {
         }
     }
 
+    const getDueDate = () => {
+        console.log("due date ", dueDate);
+        // setDueDate();
+        // return dueDate;
+    }
+
     const getTransactionDetails = async () => {
         try {
             const res = await fetchTransactionDetails(cardId);
-            console.log("res", res);
             setTransactionDetail(res?.data?.transactions);
         } catch (e) {
             console.log(e);
@@ -52,10 +60,12 @@ export default function CardDetailPage() {
 
     useEffect(() => {
         getCardDetails();
-    }, [user]);
-
+        getDueDate();
+    }, [cardId]);
     return (
         <div className="container">
+            <div className = "d-flex flex-row-reverse"> <Link className="float-right btn btn-primary" href={`/expenditure/${cardId}`}>
+                Expenditure</Link> </div>
             <div className="d-flex flex-row align-items-center justify-content-around">
                          
                 <div className="cred-card">
@@ -88,9 +98,9 @@ export default function CardDetailPage() {
                     </div>
                 </div>
 
-                <div>
-                    Due Date: {cardDetail?.['card_billing_date']}
-                </div>
+               {dueDate && <div>
+                    Due Date: {dueDate}
+                </div>}
 
                 <div>
                     Amount Due: {cardDetail?.['card_billing_date']}
