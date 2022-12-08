@@ -32,23 +32,37 @@ USER REQUIREMENTS
 12. Give user a payment gateway to pay his dues.
 13. Display user's payment transactions.
 14. Display User's payment Statuses.
-15. Display user's credit score.
+
 
 TECH STACK
 -------------
 
-   1. Front End - NextJs
-   2. Backend - NodeJs, ExpressJs
-   3. Database - MongoDB.
+   1. Front End - NextJs(Typescript)
+   2. Backend - NodeJs, ExpressJs(Typescript)
+   3. Database - MongoDB.
+   4. API: Stripe, 
+   5. Charts: ChartsJS
+
+
    
    
 DOMAIN MODEL   
 -------------
-   <img width="324" alt="DomainModel" src="https://user-images.githubusercontent.com/113073353/199599272-49ea4be6-9a85-4ffd-aa5b-c9c6a22f5074.PNG">
+   <img width="295" alt="domain model" src="https://user-images.githubusercontent.com/113073353/206516204-d54894f1-d0fd-4300-8266-d6d162e2c6e3.png">
+
    
    [credCheck Domain Model.pdf](https://github.com/neu-mis-info6150-fall-2022/final-project-develites/files/9924031/credCheck.Domain.Model.pdf)
 
 
+FrontEnd -
+* cd credcheck-frontend
+* npm install
+* npm run dev
+
+BackEnd -
+* cd credcheck-backend
+* npm install
+* npm run dev
 
 
 MAINTAINERS
@@ -60,10 +74,8 @@ MAINTAINERS
  * Shreya Sharma - sharma.shreya3@northeastern.edu 
 
 
-PRESENTATION VIDEO
+PRESENTATION PPT
 -----------
- 
- 
 
-
+[cred check ppt.pptx](https://github.com/neu-mis-info6150-fall-2022/final-project-develites/files/10187675/cred.check.ppt.pptx)
 
