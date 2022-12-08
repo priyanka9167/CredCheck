@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.fetchExpenditureByCardId = exports.addExpenditureDetail = void 0;
+exports.fetchExpenditureByCardIdDate = exports.fetchExpenditureByCardId = exports.addExpenditureDetail = void 0;
 const expenditure_schema_1 = __importDefault(require("../models/expenditure/expenditure.schema"));
 const addExpenditureDetail = (expenditure) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -27,7 +27,7 @@ const addExpenditureDetail = (expenditure) => __awaiter(void 0, void 0, void 0, 
 exports.addExpenditureDetail = addExpenditureDetail;
 const fetchExpenditureByCardId = (cardId) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const expenditureDetails = yield expenditure_schema_1.default.find({ card_id: { $gte: cardId } });
+        const expenditureDetails = yield expenditure_schema_1.default.find({ card_id: cardId });
         return expenditureDetails;
     }
     catch (err) {
@@ -36,3 +36,14 @@ const fetchExpenditureByCardId = (cardId) => __awaiter(void 0, void 0, void 0, f
     }
 });
 exports.fetchExpenditureByCardId = fetchExpenditureByCardId;
+const fetchExpenditureByCardIdDate = (cardId, currMonth) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const expenditureList = yield expenditure_schema_1.default.find({ card_id: cardId, expenditure_trasaction_date: { $gte: currMonth } });
+        return expenditureList;
+    }
+    catch (err) {
+        console.log(err);
+        throw err;
+    }
+});
+exports.fetchExpenditureByCardIdDate = fetchExpenditureByCardIdDate;

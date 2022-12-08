@@ -19,3 +19,22 @@ export const getExpenditureByCardId = async(req: Request, res: Response, next: N
         next(err);
     }
 }
+
+export const getbillingAmount = async(req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+        const date = new Date();
+        let totalAmnt = 0;
+        const currentMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+        const expenditureList = await expenditureService.fetchExpenditureByCardIdDate(req.params.id,currentMonth);
+        if (expenditureList && expenditureList.length > 0 ) {
+            expenditureList.forEach( (exp: { status: string; expenditure_amount: number; }) => {
+                if (exp.status === 'Sucess') {
+                    totalAmnt += exp.expenditure_amount;
+                }
+            });
+        }
+        res.send({"totalAMt": totalAmnt});
+    } catch (err) {
+        next(err);
+    }
+}

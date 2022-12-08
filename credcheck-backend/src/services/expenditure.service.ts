@@ -13,10 +13,20 @@ export const addExpenditureDetail = async (expenditure: IExpenditure): Promise<I
 
 export const fetchExpenditureByCardId = async (cardId: String): Promise<any> => {
     try {
-        const expenditureDetails = await expenditureModel.find({card_id:{$gte: cardId}});
+        const expenditureDetails = await expenditureModel.find({card_id: cardId});
         return expenditureDetails;
     } catch (err) {
         console.log(err);
         throw err;
     }
+}
+
+export const fetchExpenditureByCardIdDate = async (cardId: String, currMonth: Date): Promise<any> => {
+    try {
+        const expenditureList = await expenditureModel.find({card_id: cardId, expenditure_trasaction_date: {$gte: currMonth}});
+        return expenditureList;
+    } catch (err) {
+        console.log(err);
+        throw err;
+    } 
 }

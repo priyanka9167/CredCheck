@@ -27,7 +27,7 @@ const addTransactionDetail = (transaction) => __awaiter(void 0, void 0, void 0, 
 exports.addTransactionDetail = addTransactionDetail;
 const fetchTransactionByCardId = (cardId) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const transactionDetails = yield transaction_schema_1.default.find({ card_id: { $gte: cardId } });
+        const transactionDetails = yield transaction_schema_1.default.find({ card_id: cardId });
         return transactionDetails;
     }
     catch (err) {

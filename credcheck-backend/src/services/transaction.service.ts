@@ -13,7 +13,7 @@ export const addTransactionDetail = async (transaction: ITrasactions): Promise<I
 
 export const fetchTransactionByCardId = async (cardId: String): Promise<any> => {
     try {
-        const transactionDetails = await transactionModel.find({card_id:{$gte: cardId}});
+        const transactionDetails = await transactionModel.find({card_id: cardId});
         return transactionDetails;
     } catch (err) {
         console.log(err);

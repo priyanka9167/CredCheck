@@ -32,3 +32,4 @@ const expenditureController = __importStar(require("../controllers/expenditure.c
 exports.router = express_1.default.Router();
 exports.router.post('/', expenditureController.addExpenditureDetail);
 exports.router.get('/:id', expenditureController.getExpenditureByCardId);
+exports.router.get('/totalBill/:id', expenditureController.getbillingAmount);

@@ -32,7 +32,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getExpenditureByCardId = exports.addExpenditureDetail = void 0;
+exports.getbillingAmount = exports.getExpenditureByCardId = exports.addExpenditureDetail = void 0;
 const expenditureService = __importStar(require("./../services/expenditure.service"));
 const addExpenditureDetail = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -54,3 +54,23 @@ const getExpenditureByCardId = (req, res, next) => __awaiter(void 0, void 0, voi
     }
 });
 exports.getExpenditureByCardId = getExpenditureByCardId;
+const getbillingAmount = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const date = new Date();
+        let totalAmnt = 0;
+        const currentMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+        const expenditureList = yield expenditureService.fetchExpenditureByCardIdDate(req.params.id, currentMonth);
+        if (expenditureList && expenditureList.length > 0) {
+            expenditureList.forEach((exp) => {
+                if (exp.status === 'Sucess') {
+                    totalAmnt += exp.expenditure_amount;
+                }
+            });
+        }
+        res.send({ "totalAMt": totalAmnt });
+    }
+    catch (err) {
+        next(err);
+    }
+});
+exports.getbillingAmount = getbillingAmount;
