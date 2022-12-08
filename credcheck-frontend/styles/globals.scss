@@ -10,6 +10,8 @@ html,
 body {
   padding: 0;
   margin: 0;
+  height: 100%;
+ 
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
@@ -128,15 +130,27 @@ z-index:10;
 }
 
 .footer{
-  position: fixed;
+  // position: fixed;
   left: 0;
-  bottom: 0;
+  bottom: 10px;
   width: 100%;
  padding: 20px 0;
- margin-top: 50px;
+margin-top: 200px;
 }
 
 .card-elemnt {
   border: 1px solid red;
   padding: 10px;
+}
+
+.Home_container__97eC3{
+  padding: 0 !important;
+}
+
+a:hover{
+  color: white;
+}
+
+.container-box{
+  min-height: calc(100vh - 70px);
 }

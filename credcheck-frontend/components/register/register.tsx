@@ -2,6 +2,7 @@ import { withFormik, FormikProps, Field, Form, Formik, ErrorMessage ,FormikHelpe
 import * as Yup from "yup";
 import { userRegistration } from "../../services/users/users";
 import Router from "next/router";
+import Link from 'next/link';
 
 interface UserFormValues {
   firstname: string;
@@ -43,10 +44,8 @@ export default function RegisterForm() {
         }
        catch(e)
         {
-          
+          console.log(e)
         }
-      
-
        }}
       validationSchema={Yup.object().shape({
         firstname: Yup.string()
@@ -69,6 +68,8 @@ export default function RegisterForm() {
       })}
     >
       {({ errors, touched }) => (
+        <>
+         <h3>Register Page</h3>
         <Form>
           <div className="row g-3">
             <div className="col-md-6">
@@ -153,11 +154,12 @@ export default function RegisterForm() {
               </div>
             </div>
             <div className="col-12">
-              <button className="btn btn-primary py-3 px-4">Register</button>
-              <a href="http://localhost:3000/login">Login</a>
+            <button className="btn btn-primary m-1" type="submit">Register</button>
+            <button className="btn btn-primary m-1"><Link href={"/login"}>Login</Link></button>
             </div>
           </div>
         </Form>
+        </>
       )}
     </Formik>
 

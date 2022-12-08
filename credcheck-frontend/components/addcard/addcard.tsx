@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { addCards } from "../../services/users/cards/cards";
 
 export default function NewCard() {
+    // Initial state of card
     const initialValues: cardState = {
         card_name: "",
         card_no: "",
@@ -20,7 +21,7 @@ export default function NewCard() {
         card_billing_date: new Date(""),
         card_status: ""
     };
-
+// redux state 
     const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
     const user: userState = useTypedSelector(selectUser);
     const token: cred_token = useTypedSelector(selectToken);
@@ -29,13 +30,13 @@ export default function NewCard() {
 
     return (
         <>
+        {/* react formik form */}
             <Formik
                 initialValues={initialValues}
                 onSubmit={async (values, { resetForm }: FormikHelpers<cardState>): Promise<void> => {
                     try {
-                       
+
                         const payload = {
-                           
                             card_name: values.card_name,
                             card_no: values.card_no,
                             card_type: values.card_type,
@@ -44,15 +45,12 @@ export default function NewCard() {
                             card_cvv: values.card_cvv,
                             card_billing_date: values.card_billing_date,
                             card_status: values.card_status,
-                            user_id:user.id
+                            user_id: user.id
                         }
-                        const res = await addCards(`/card`,payload);
-                        if(res.status === 200)
-                        {
+                        const res = await addCards(`/card`, payload);
+                        if (res.status === 200) {
                             resetForm();
                         }
-
-                       
                     }
                     catch (e) {
                         console.log(e);

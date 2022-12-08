@@ -73,6 +73,8 @@ export default function UpdateForm() {
             })}
         >
             {({ errors, touched }) => (
+                <>
+                 <h3>Update Page</h3>
                 <Form>
                     <div className="row g-3">
                         <div className="col-md-6">
@@ -157,11 +159,12 @@ export default function UpdateForm() {
                             </div>
                         </div>
                         <div className="col-12">
-                            <button className="btn btn-primary py-3 px-4">Update</button>
+                            <button className="btn btn-primary">Update</button>
                           
                         </div>
                     </div>
                 </Form>
+                </>
             )}
         </Formik>
 

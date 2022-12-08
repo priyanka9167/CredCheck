@@ -20,35 +20,38 @@ export default function Layout({ children }: { children: any }) {
     const token: cred_token = useTypedSelector(selectToken);
     const router = useRouter();
 
-  
+
     const checkAuth = () => {
-      
+
         if (user.email === '') {
-          if (router.pathname !== '/login' && router.pathname !== '/register') {
+            if (router.pathname !== '/login' && router.pathname !== '/register') {
                 router.push('/login')
             }
 
         }
         else {
-         
-           if (router.pathname === '/login' || router.pathname === '/register') {
-              router.push('/');
+
+            if (router.pathname === '/login' || router.pathname === '/register') {
+                router.push('/');
             }
         }
     }
 
     useEffect(() => {
-      
+
         checkAuth();
-       
-    }, [user,token,router])
+
+    }, [user, token, router])
 
 
 
     return (
         <>
-            <Header />
-            {children}
+            <div className='container container-box'>
+                <Header />
+                {children}
+
+            </div>
             <Footer />
         </>
     )

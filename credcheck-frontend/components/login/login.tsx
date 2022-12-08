@@ -64,6 +64,7 @@ export default function LoginForm() {
           })}
         >
         <div className="container mt-4">
+            <h3>Login Page</h3>
                    <Form>
                         <div className="row g-3">
                             <div className="col-12">
@@ -93,8 +94,8 @@ export default function LoginForm() {
                                 </div>
                             </div>
                             <div className="col-12">
-                                <button className="btn btn-primary py-3 px-4" type="submit">Login</button>
-                                <button className="btn btn-primary py-3 px-4" type="submit"><Link href={"/register"}>Register</Link></button>
+                                <button className="btn btn-primary m-1" type="submit">Login</button>
+                                <button className="btn btn-primary m-1"><Link href={"/register"}>Register</Link></button>
                             </div>
                         </div>
                     </Form>
