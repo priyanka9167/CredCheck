@@ -32,7 +32,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getTransactionByCardId = exports.addTransactionDetail = void 0;
+exports.getTransactionByMonth = exports.getTransactionByCardId = exports.addTransactionDetail = void 0;
 const transactionService = __importStar(require("./../services/transaction.service"));
 const addTransactionDetail = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -54,3 +54,15 @@ const getTransactionByCardId = (req, res, next) => __awaiter(void 0, void 0, voi
     }
 });
 exports.getTransactionByCardId = getTransactionByCardId;
+const getTransactionByMonth = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const date = new Date();
+        const currentMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+        const transactionHappened = yield transactionService.fetchTransactionByMonth(req.params.id, currentMonth);
+        res.send({ "transactionHappened": transactionHappened });
+    }
+    catch (err) {
+        next(err);
+    }
+});
+exports.getTransactionByMonth = getTransactionByMonth;

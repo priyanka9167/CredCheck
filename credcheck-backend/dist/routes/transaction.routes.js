@@ -32,3 +32,4 @@ const transactionController = __importStar(require("../controllers/transaction.c
 exports.router = express_1.default.Router();
 exports.router.post('/', transactionController.addTransactionDetail);
 exports.router.get('/:id', transactionController.getTransactionByCardId);
+exports.router.get('/transbymonth/:id', transactionController.getTransactionByMonth);

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.fetchTransactionByCardId = exports.addTransactionDetail = void 0;
+exports.fetchTransactionByMonth = exports.fetchTransactionByCardId = exports.addTransactionDetail = void 0;
 const transaction_schema_1 = __importDefault(require("../models/transactions/transaction.schema"));
 const addTransactionDetail = (transaction) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -36,3 +36,14 @@ const fetchTransactionByCardId = (cardId) => __awaiter(void 0, void 0, void 0, f
     }
 });
 exports.fetchTransactionByCardId = fetchTransactionByCardId;
+const fetchTransactionByMonth = (cardId, currentMonth) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const transactionData = yield transaction_schema_1.default.find({ card_id: cardId, expenditure_trasaction_date: { $gte: currentMonth } });
+        return transactionData;
+    }
+    catch (err) {
+        console.log(err);
+        throw err;
+    }
+});
+exports.fetchTransactionByMonth = fetchTransactionByMonth;

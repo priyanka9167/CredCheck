@@ -93,7 +93,7 @@ useEffect(() => {
 
            <div> 
            Amount to be paid:
-            {amountDue} </div>
+            ${amountDue} </div>
             <div> Card Holder Name: {cardDetail?.['card_name']}  </div>
             <div> card Number: {cardDetail?.['card_no']} </div>
 

@@ -20,3 +20,13 @@ export const fetchTransactionByCardId = async (cardId: String): Promise<any> => 
         throw err;
     }
 }
+
+export const fetchTransactionByMonth = async(cardId: String, currentMonth: Date): Promise<any> => {
+    try {
+        const transactionData = await transactionModel.find({card_id: cardId, expenditure_trasaction_date: {$gte: currentMonth}});
+        return transactionData;
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+}

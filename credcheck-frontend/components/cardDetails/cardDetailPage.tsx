@@ -5,8 +5,9 @@ import { useSelector, TypedUseSelectorHook } from "react-redux";
 import { userState, cred_token } from "../../models/user.types";
 import { selectUser } from "../../redux/reducers/userReducers";
 import { fetchCardDetails } from "../../services/users/cards/cards"; 
-import { fetchTransactionDetails } from "../../services/transaction";
+import { fetchTransactionDetails, fetchTransactionByMonth } from "../../services/transaction";
 import { RootState } from "../../redux/store";
+import { fetchAmountDue } from '../../services/expenditure';
 import  TransactionDetailPage  from './transactionDetails/transactionDetailPage';
 import Link from "next/link";
 import { setDefaultResultOrder } from "dns";
@@ -14,8 +15,8 @@ import { setDefaultResultOrder } from "dns";
 export default function CardDetailPage() {
     const router = useRouter();
     const cardId: String = router.query.id;
-    
-    const [dueDate, setDueDate] = useState();
+    const[showPay,setShowPay] = useState(false);
+    const[amountDue, setAmountDue] = useState(0);
     const [cardDetail, setCardDetail] = useState();
     const [transactionDetail, setTransactionDetail] = useState();
 
@@ -29,8 +30,9 @@ export default function CardDetailPage() {
                 const res = await fetchCardDetails(cardId);
                 if (res.status === 200) {
                     setCardDetail(res?.data?.cardDetail);
-                    setDueDate(new Date(res?.data?.cardDetail?.card_billing_date).getDate());
                     getTransactionDetails();
+                    dueDate(res?.data?.cardDetail?.card_billing_date);
+                    getTransactionByMonth();
                 }
                 else {
                     console.log(res?.message)
@@ -43,11 +45,35 @@ export default function CardDetailPage() {
         }
     }
 
-    const getDueDate = () => {
-        console.log("due date ", dueDate);
-        // setDueDate();
-        // return dueDate;
+    const getTransactionByMonth = async () => {
+        const res = await fetchTransactionByMonth(cardId);
+        
+        if (res && res.data && res.data.transactionHappened && res.data.transactionHappened.length > 0) {
+            setShowPay(false);
+            setAmountDue(0);
+        } else {
+            getAmountDueForThisMonth();
+        }
     }
+
+    const getAmountDueForThisMonth = async () => {
+        const res = await fetchAmountDue(cardId);
+        if (res && res.data && res.data.totalAMt) {
+            setAmountDue(res.data.totalAMt);
+        } 
+
+    }
+
+
+    const dueDate = (value:any) => {
+        let date = new Date(value);
+        let new_date = new Date();
+        const days_left = date.getDate() - new_date.getDate();
+        console.log("original date", days_left);
+         if(days_left < 2 || days_left == 2){
+             setShowPay(true);
+         }
+     }
 
     const getTransactionDetails = async () => {
         try {
@@ -60,7 +86,6 @@ export default function CardDetailPage() {
 
     useEffect(() => {
         getCardDetails();
-        getDueDate();
     }, [cardId]);
     return (
         <div className="container">
@@ -98,21 +123,21 @@ export default function CardDetailPage() {
                     </div>
                 </div>
 
-               {dueDate && <div>
-                    Due Date: {dueDate}
-                </div>}
+                <div>
+                    Due Date: {cardDetail?.['card_billing_date'].split('T')[0]}
+                </div>
 
                 <div>
-                    Amount Due: {cardDetail?.['card_billing_date']}
+                    Amount Due: ${amountDue}
                 </div>
-                <Link  href={
+                { showPay && <Link  href={
                     {pathname: '/paymentgateway',
                     query: {
                         id: cardId,
-                        amountDue: "$200"
+                        amountDue: amountDue
                     }}
                 }
-                 className="btn btn-success"> PAY </Link>
+                 className="btn btn-success"> PAY </Link>}
             </div>
             <div className="h4 mt-3 text-center mb-2"> Past Transactions</div>
            {transactionDetail && transactionDetail?.length > 0 && <div>

@@ -19,3 +19,15 @@ export const getTransactionByCardId = async(req: Request, res: Response, next: N
         next(err);
     }
 }
+
+export const getTransactionByMonth = async(req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+        
+        const date = new Date();
+        const currentMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+        const transactionHappened = await transactionService.fetchTransactionByMonth(req.params.id as String, currentMonth);
+        res.send({"transactionHappened": transactionHappened});
+    } catch (err) {
+        next(err);
+    }
+}
