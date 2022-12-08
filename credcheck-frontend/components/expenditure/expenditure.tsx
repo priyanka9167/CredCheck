@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { selectToken } from "../../redux/reducers/userReducers";
 import { useSelector, TypedUseSelectorHook } from "react-redux";
 import ExpenditureDetailsPage from "./expenditureItem/expenditureItem";
+import ExpenditureChart from "./expenditureChart/expenditureChart";
 import { userState, cred_token } from "../../models/user.types";
 import { selectUser } from "../../redux/reducers/userReducers";
 import { fetchExpenditureDetails } from "../../services/expenditure";
@@ -44,7 +45,7 @@ export default function ExpenditurePage() {
     return (
         <div className = "container">
              {expenditureDetails && expenditureDetails?.length > 0 && <div>
-
+                <ExpenditureChart expenditureDetails={expenditureDetails}/>
                 <table className="table table-sm">
                     <thead>
                         <tr>
